@@ -7,7 +7,42 @@ import android.graphics.RectF;
  * @author Scott Leland Crossen
  */
 public class ViewPort {
+/*
+FIELDS
+ */
     /*private Ship ship;*/
+    /**
+     * The dimensions of the viewport
+     */
     private RectF dimensions;
+    /**
+     * The dimension of the level.
+     */
     private RectF level_dimensions;
+/*
+CONSTRUCTORS
+ */
+/*
+METHODS
+ */
+/*
+CONSTANTS/FINALS
+ */
+/*
+GETTERS/SETTERS
+ */
+    /**
+     * The getter for the current viewport dimensions
+     * @return  the viewport dimensions
+     */
+    public RectF getDimensions() {
+        return dimensions;
+    }
+    /**
+     * The getter for the current level dimensions
+     * @return  the level dimensions
+     */
+    public RectF getLevel_dimensions() {
+        return level_dimensions;
+    }
 }

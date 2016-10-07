@@ -9,6 +9,17 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @author Scott leland Crossen
  */
 public class DbOpenHelper extends SQLiteOpenHelper {
+/*
+FIELDS
+ */
+    /**
+     * The name of the database file.
+     */
+    private static final String DB_NAME = "asteroidsdata.sqlite";
+
+/*
+CONSTRUCTORS
+ */
     /**
      * the constructor for the open helper.
      * @param context   only the context needs to be passed in.
@@ -17,16 +28,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     {
         super(context, DB_NAME, null, DB_VERSION);
     }
-    /**
-     * The name of the database file.
-     */
-    private static final String DB_NAME = "asteroidsdata.sqlite";
-
-    /**
-     * The database version (1st version).
-     */
-    private static final int DB_VERSION = 1;
-
+/*
+METHODS
+ */
     /**
      * This method is called when the database is created.
      * @param db    the sqlitedatabase that is being created.
@@ -36,18 +40,29 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     {
         createTables(db);
     }
-
+    /**
+     * This method is called when the database is updated
+     * @param db    the sqlitedatabase that is being created.
+     * @param oldVersion    the old version of sql
+     * @param newVersion    the new version of sql
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
+    /**
+     * This method is called to "reset" the database.
+     * @param db    the sqlitedatabase that is being created.
+     */
     public static void dropAndCreate(SQLiteDatabase db)
     {
         dropTables(db);
         createTables(db);
     }
-
+    /**
+     * This method drops tables: ALL
+     * @param db    the sqlitedatabase that is being created.
+     */
     public static void dropTables(SQLiteDatabase db)
     {
         db.execSQL(DROP_TABLE_BGOBJECT_SQL);
@@ -61,7 +76,10 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_TABLE_ENGINES_SQL);
         db.execSQL(DROP_TABLE_POWERCORES_SQL);
     }
-
+    /**
+     * This method calls the create statements on the database
+     * @param db    the sqlitedatabase that is being created.
+     */
     public static void createTables(SQLiteDatabase db)
     {
         db.execSQL(CREATE_TABLE_BGOBJECTS_SQL);
@@ -75,7 +93,16 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_ENGINES_SQL);
         db.execSQL(CREATE_TABLE_POWERCORES_SQL);
     }
-
+/*
+CONSTANTS/FINALS
+ */
+    /**
+     * The database version (1st version).
+     */
+    private static final int DB_VERSION = 1;
+    /**
+     * The drop-table commands used.
+     */
     private static final String DROP_TABLE_BGOBJECT_SQL = "DROP TABLE IF EXISTS BackgroundObjects;";
     private static final String DROP_TABLE_ASTEROIDS_SQL = "DROP TABLE IF EXISTS AsteroidTypes;";
     private static final String DROP_TABLE_LEVELS_SQL = "DROP TABLE IF EXISTS Levels;";
@@ -86,7 +113,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_EXTRAPARTS_SQL = "DROP TABLE IF EXISTS ExtraParts;";
     private static final String DROP_TABLE_ENGINES_SQL = "DROP TABLE IF EXISTS Engines;";
     private static final String DROP_TABLE_POWERCORES_SQL = "DROP TABLE IF EXISTS PowerCores;";
-
+    /**
+     * The create-table commands used.
+     */
     private static final String CREATE_TABLE_BGOBJECTS_SQL =
             "CREATE TABLE BackgroundObjects "+
                     "(" +
@@ -190,4 +219,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                     "   cannon_boost integer not null," +
                     "   engine_boost integer not null" +
                     "); ";
+/*
+GETTERS/SETTERS
+ */
+    /**
+     * The getter for the database name
+     * @return  the database name
+     */
+    public static String getDbName() {
+        return DB_NAME;
+    }
 }

@@ -3,13 +3,12 @@ package edu.byu.cs.superasteroids.model.asteroids;
 import android.graphics.PointF;
 
 import edu.byu.cs.superasteroids.model.Image;
-import edu.byu.cs.superasteroids.model.MovingObject;
 
 /**
- * This class describes the behavior of any of the subclasses of asteroids.
+ * Asteroids splinter into these when shot.
  * @author Scott Leland Crossen
  */
-public abstract class Asteroid extends MovingObject {
+public class AsteroidFragment extends Asteroid{
 /*
 FIELDS
  */
@@ -17,11 +16,12 @@ FIELDS
 CONSTRUCTORS
  */
     /**
-     * The constructor for the asteroid class
+     * The constructor for this type of asteroid
      * @param image     the image of the asteroid.
+     * @param _map_coords    the location of the created asteroid on the map
      */
-    public Asteroid(Image image) {
-        super(image, new PointF(0, 0), 0, 0);
+    public AsteroidFragment(Image image, PointF _map_coords) {
+        super(image);
     }
 /*
 METHODS

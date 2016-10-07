@@ -7,7 +7,16 @@ import android.graphics.PointF;
  * @author Scott Leland Crossen
  */
 public abstract class PositionedObject extends VisibleObject{
+/*
+FIELDS
+ */
+    /**
+     * The position of the object.
+     */
     private PointF position; // The x, y coordinates.
+/*
+CONSTRUCTORS
+ */
     /**
      * The constructor of the positioned object
      * @param image     how the object looks
@@ -17,10 +26,31 @@ public abstract class PositionedObject extends VisibleObject{
         super(image);
         position=_position;
     }
-    public void setPosition(){}
+/*
+METHODS
+ */
     /**
      * Draws the object if in the viewport.
      */
     @Override
     public void draw(){}
+/*
+CONSTANTS/FINALS
+ */
+/*
+GETTERS/SETTERS
+ */
+    /**
+     * The getter for position
+     * @return  the current position of the object
+     */
+    public PointF getPosition() {
+        return position;
+    }
+    /**
+     * The setter for the position
+     */
+    public void setPosition(PointF _position){
+        position=_position;
+    }
 }
