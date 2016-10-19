@@ -45,14 +45,14 @@ METHODS
      * This method adds from a JSONObject. Its primary function is recursive. It will call other 'add' functions as necessary.
      * @param root_node     the JSONObject to read in.
      */
-    private void addBGobjects(JSONObject root_node) throws org.json.JSONException {
+    public void addBGobjects(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method adds asteroids to the database
      * @param root_node    The JSONObject containing the list of asteroids.
      * @throws org.json.JSONException   Required from JSON manipulation requirement.
      */
-    private void addAsteroids(JSONObject root_node) throws org.json.JSONException {
+    public void addAsteroids(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method gets the list of cannons contained in the database.
@@ -66,7 +66,7 @@ METHODS
      * @param root_node     The JSONObject containing the list of cannons.
      * @throws org.json.JSONException   Required from JSON manipulation requirement.
      */
-    private void addCannons(JSONObject root_node) throws org.json.JSONException {
+    public void addCannons(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method gets the list of engines contained in the database.
@@ -94,7 +94,7 @@ METHODS
      * @param root_node     The JSONObject containing the list of extra-parts
      * @throws org.json.JSONException   Required from JSON manipulation requirement.
      */
-    private void addExtraParts(JSONObject root_node) throws org.json.JSONException {
+    public void addExtraParts(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method gets the list of level objects contained in the database.
@@ -125,7 +125,7 @@ METHODS
      * @param root_node     The JSONObject containing the list of levels
      * @throws org.json.JSONException
      */
-    private void addLevels(JSONObject root_node) throws org.json.JSONException {
+    public void addLevels(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method gets the list of main-bodies contained in the database.
@@ -139,7 +139,7 @@ METHODS
      * @param root_node     The JSONObject containing the list of main-bodies.
      * @throws org.json.JSONException   Required from JSON manipulation requirement.
      */
-    private void addMainBodies(JSONObject root_node) throws org.json.JSONException {
+    public void addMainBodies(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method gets the list of power-cores contained in the database.
@@ -153,7 +153,7 @@ METHODS
      * @param root_node     The JSONObject containing the list of power-cores
      * @throws org.json.JSONException   Required from JSON manipulation requirement.
      */
-    private void addPowerCores(JSONObject root_node) throws org.json.JSONException {
+    public void addPowerCores(JSONObject root_node) throws org.json.JSONException {
     }
     /**
      * This method is the root call for importing a JSONObject.
