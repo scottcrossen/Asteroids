@@ -38,7 +38,7 @@ CONSTRUCTORS
     {
         base_context = baseContext;
         db_open_helper = new DbOpenHelper(base_context);
-        database=db_open_helper,getWritableDatabase();
+        database=db_open_helper.getWritableDatabase();
         dao=new DAO(database);
     }
 /*
