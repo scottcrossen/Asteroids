@@ -63,14 +63,14 @@ METHODS
         //clearAll(); // I'll handle this in the GameDataImporter
         debug.output("Now Importing JSON");
         JSONObject root_node = root_object.getJSONObject("asteroidsGame");
-        //addBGobjects(root_object);
-        //addAsteroids(root_object);
-        //addLevels(root_object);
-        //addMainBodies(root_object);
-        //addCannons(root_object);
-        //addExtraParts(root_object);
-        //addEngines(root_object);
-        //addPowerCores(root_object);
+        addBGobjects(root_object);
+        addAsteroids(root_object);
+        addLevels(root_object);
+        addMainBodies(root_object);
+        addCannons(root_object);
+        addExtraParts(root_object);
+        addEngines(root_object);
+        addPowerCores(root_object);
         debug.output("JSON Imported");
     }
     /**
