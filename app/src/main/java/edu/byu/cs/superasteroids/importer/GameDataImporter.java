@@ -32,8 +32,7 @@ CONSTRUCTORS
 METHODS
  */
     @Override
-    public boolean importData(InputStreamReader dataInputReader)
-    {
+    public boolean importData(InputStreamReader dataInputReader) {
         db.dao.clearAll();
         JSONObject root_obj;
         try {
