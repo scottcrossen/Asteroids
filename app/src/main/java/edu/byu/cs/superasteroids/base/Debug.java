@@ -1,7 +1,7 @@
 package edu.byu.cs.superasteroids.base;
 
 import android.util.Pair;
-
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +16,7 @@ FIELDS
     /**
      * The extent of instantiated objects
      */
-    private static List<Debug> extent;
+    private static List<Debug> extent=new ArrayList<Debug>();
     /**
      * Whether the class is turned on
      */
@@ -28,21 +28,21 @@ FIELDS
     /**
      * The list of flags encountered
      */
-    private static List<Pair<Integer,Integer>> flag_list;
-/*
-CONSTRUCTORS
- */
+    private static List<Pair<Integer,Integer>> flag_list= new ArrayList<>();
+    /*
+    CONSTRUCTORS
+     */
     /**
      * The default constructor of the object
      */
-    Debug(){
+    public Debug(){
         extent.add(this);
     }
     /**
      * The constructor of the object with ID
      * @param _id   the ID of the object
      */
-    Debug(int _id){
+    public Debug(int _id){
         id=_id;
         extent.add(this);
     }
@@ -55,7 +55,7 @@ METHODS
      */
     public void flag(int flag){
         if(turned_on) {
-            Pair<Integer, Integer> new_pair = new Pair<>(id, flag);
+            Pair<Integer, Integer> new_pair=new Pair<Integer,Integer>(id, flag);
             flag_list.add(new_pair);
         }
     }
