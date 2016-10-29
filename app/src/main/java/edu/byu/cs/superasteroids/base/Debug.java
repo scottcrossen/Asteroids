@@ -101,3 +101,18 @@ METHODS
         }
     }
 }
+/*
+Debug Notes:
+For emulators the shell can be reached by "adb -e shell"
+databases are located in: data/data/<your-package-name>/databases/
+SQL commands can be used after script: sqlite3 <your-db-name>.db
+SQL Cheat Sheet:
+List the tables in your database:
+.tables
+List how the table looks:
+.schema tablename
+Print the entire table:
+SELECT * FROM tablename;
+List all of the available SQLite prompt commands:
+.help
+ */
