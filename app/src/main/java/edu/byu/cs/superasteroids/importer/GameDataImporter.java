@@ -42,12 +42,12 @@ METHODS
             return false;
         } catch(org.json.JSONException e) {
             return false;
-        }/*
+        }
         try {
             db.dao.importJSON(root_obj);
         } catch (org.json.JSONException e) {
             return false;
-        }*/
+        }
         return true;
     }
     private static String makeString(InputStreamReader reader) throws IOException {
@@ -57,6 +57,7 @@ METHODS
         while ((n = reader.read(buf)) > 0) {
             sb.append(buf, 0, n);
         }
+        debug.output("Reading in JSON file:");
         debug.output(sb.toString());
         return sb.toString();
     }

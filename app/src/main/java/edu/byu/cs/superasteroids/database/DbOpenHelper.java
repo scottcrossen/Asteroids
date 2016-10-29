@@ -120,7 +120,7 @@ CONSTANTS/FINALS
             "CREATE TABLE BackgroundObjects "+
                     "(" +
                     "   id integer not null primary key autoincrement," +
-                    "   imagepath text not null" +
+                    "   image_path text not null" +
                     ");";
     private static final String CREATE_TABLE_ASTEROIDS_SQL =
             "CREATE TABLE AsteroidTypes " +

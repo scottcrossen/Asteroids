@@ -18,7 +18,7 @@ FIELDS
     /**
      * this is where the database is kept in memory.
      */
-    private SQLiteDatabase database = db_open_helper.getWritableDatabase();
+    private SQLiteDatabase database;
     /**
      * The base context
      */
@@ -26,7 +26,7 @@ FIELDS
     /**
      * A copy of the DAO for public database access.
      */
-    public DAO dao = new DAO(database);
+    public DAO dao;
 /*
 CONSTRUCTORS
  */
