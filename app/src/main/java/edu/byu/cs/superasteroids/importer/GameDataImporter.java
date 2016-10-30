@@ -14,9 +14,9 @@ import edu.byu.cs.superasteroids.database.Database;
  * Created by slxn42 on 10/29/16.
  */
 public class GameDataImporter implements IGameDataImporter {
-    /*
-    FIELDS
-    */
+/*
+FIELDS
+*/
     private Database db;
     private Context context;
     private static Debug debug;

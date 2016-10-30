@@ -29,9 +29,9 @@ FIELDS
      * The list of flags encountered
      */
     private static List<Pair<Integer,Integer>> flag_list= new ArrayList<>();
-    /*
-    CONSTRUCTORS
-     */
+/*
+CONSTRUCTORS
+ */
     /**
      * The default constructor of the object
      */

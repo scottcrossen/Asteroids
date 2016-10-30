@@ -74,8 +74,9 @@ METHODS
     /**
      * Creates a new ship.
      */
-    public static void createNew() {
+    public static Ship createNew() {
         ourInstance = new Ship();
+        return getInstance();
     }
     /**
      * Update the ship on the screen.
@@ -87,7 +88,10 @@ METHODS
      * @param elapsedTime   the time elapsed.
      */
     public void update(double elapsedTime){}
+    public boolean isComplete(){return false;}
+    public void draw(PointF position, float scale){
 
+    }
 /*
 CONSTANTS/FINALS
  */

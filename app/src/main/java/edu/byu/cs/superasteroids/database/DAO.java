@@ -475,7 +475,7 @@ METHODS
 /*
 CONSTANTS/FINALS
  */
-    final String GET_LEVEL_SQL =
+    private final String GET_LEVEL_SQL =
         "select " +
             "level_number, " +
             "title text, " +
@@ -485,7 +485,7 @@ CONSTANTS/FINALS
             "music " +
             "from Levels " +
             "where level_number = ?";
-    final String GET_LEVEL_OBJECTS_SQL =
+    private final String GET_LEVEL_OBJECTS_SQL =
         "select " +
             "imagepath, " +
             "position_x," +
@@ -498,7 +498,7 @@ CONSTANTS/FINALS
             "where " +
             "BackgroundObjects.id = LevelBackgroundObjects.object_id and " +
             "level_number = ?";
-    final String GET_LEVEL_ASTEROIDS_SQL =
+    private final String GET_LEVEL_ASTEROIDS_SQL =
         "select " +
             "number, " +
             "atype, " +
@@ -511,7 +511,7 @@ CONSTANTS/FINALS
             "where " +
             "LevelAsteroids.asteroid_id = AsteroidTypes.id and " +
             "level_number = ?";
-    final String GET_MAINBODIES_SQL =
+    private final String GET_MAINBODIES_SQL =
         "select " +
             "image, " +
             "image_width, " +
@@ -523,7 +523,7 @@ CONSTANTS/FINALS
             "extra_attach_x, " +
             "extra_attach_y " +
             "from MainBodies ";
-    final String GET_CANNONS_SQL =
+    private final String GET_CANNONS_SQL =
         "select " +
             "image, " +
             "image_width, " +
@@ -538,7 +538,7 @@ CONSTANTS/FINALS
             "attack_sound, " +
             "damage " +
             "from Cannons ";
-    final String GET_EXTRAPARTS_SQL =
+    private final String GET_EXTRAPARTS_SQL =
         "select " +
             "image, " +
             "image_width, " +
@@ -546,7 +546,7 @@ CONSTANTS/FINALS
             "attach_point_x, " +
             "attach_point_y " +
             "from ExtraParts ";
-    final String GET_ENGINES_SQL =
+    private final String GET_ENGINES_SQL =
         "select " +
             "image, " +
             "image_width, " +
@@ -556,7 +556,7 @@ CONSTANTS/FINALS
             "base_speed, " +
             "base_turn_rate " +
             "from Engines ";
-    final String GET_POWERCORES_SQL =
+    private final String GET_POWERCORES_SQL =
         "select " +
             "image, " +
             "cannon_boost, " +
