@@ -24,7 +24,7 @@ import edu.byu.cs.superasteroids.model.ship_parts.ShipPart;
 /**
  * Created by Scott Leland Crossen
  */
-public class ShipBuilderController implements IShipBuildingController {
+public class ShipBuildingController implements IShipBuildingController {
 /*
 FIELDS
  */
@@ -48,7 +48,7 @@ FIELDS
 /*
 CONSTRUCTORS
  */
-    ShipBuilderController(ShipBuildingActivity calling_instance){
+    ShipBuildingController(ShipBuildingActivity calling_instance){
         Database db=new Database(calling_instance);
         view=calling_instance;
         main_bodies = db.dao.getMainBodies();
@@ -119,27 +119,41 @@ METHODS
                 break;
         }
     }
+    private void debug_state(){
+        debug.output("State: "+part_selection_to_string(state));
+        debug.output("Left: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        debug.output("Up: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        debug.output("Right: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        debug.output("Down: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+    }
     private void set_arrows(){
         view.setArrow(state,IShipBuildingView.ViewDirection.LEFT,true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
-        view.setArrow(state,IShipBuildingView.ViewDirection.UP,true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
-        view.setArrow(state,IShipBuildingView.ViewDirection.RIGHT,true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
-        view.setArrow(state,IShipBuildingView.ViewDirection.DOWN,true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
+        view.setArrow(state, IShipBuildingView.ViewDirection.UP, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
+        view.setArrow(state, IShipBuildingView.ViewDirection.RIGHT, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
+        view.setArrow(state, IShipBuildingView.ViewDirection.DOWN, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
+        debug_state();
     }
     private String part_selection_to_string(IShipBuildingView.PartSelectionView part_selection){
         String output = new String();
         switch(part_selection){
             case MAIN_BODY:
                 output="Main Bodies";
+                break;
             case ENGINE:
                 output="Engines";
+                break;
             case POWER_CORE:
                 output="Power Cores";
+                break;
             case CANNON:
                 output="Cannons";
+                break;
             case EXTRA_PART:
                 output="Extra Parts";
+                break;
             default:
                 assert false;
+                break;
         }
         return output;
     }

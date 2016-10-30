@@ -38,7 +38,7 @@ public class ShipBuildingActivity extends ActivityView implements IShipBuildingV
 
         setContentView(R.layout.activity_ship_building);
 
-        IShipBuildingController controller = new ShipBuilderController(this);
+        IShipBuildingController controller = new ShipBuildingController(this);
         setController(controller);
 
 

@@ -32,10 +32,8 @@ CONSTRUCTORS
      * @param _engine_attach    the attachment point of the engine
      * @param _extra_attach     the attachment point of the extra-part.
      */
-    public MainBody(Image image, MountPoint _cannon_attach, MountPoint _engine_attach, MountPoint _extra_attach)
-    {
-        //the mount point is irrelevant here, so set it to the center of the body.
-        super(image, new MountPoint(0,0,new Image()));
+    public MainBody(Image image, MountPoint _cannon_attach, MountPoint _engine_attach, MountPoint _extra_attach) {
+        super(image, new MountPoint(image.getWidth()/2, image.getHeight()/2, image));
         cannon_attach = _cannon_attach;
         engine_attach = _engine_attach;
         extra_attach = _extra_attach;

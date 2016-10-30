@@ -19,7 +19,7 @@ FIELDS
     /**
      * The image of the visible object has a class "Image".
      */
-    protected Image image=new Image();
+    protected Image image;
 /*
 CONSTRUCTORS
  */
