@@ -42,12 +42,12 @@ METHODS
     /**
      * The update function is overridden for projectiles. They move slightly different.
      */
-    @Override
     public void update(){}
     /**
      * The update function is overridden for projectiles. They move slightly different.
      * @param elapsedTime   The elapsed time of the game.
      */
+    @Override
     public void update(double elapsedTime)
     {
         time_remaining -= elapsedTime;

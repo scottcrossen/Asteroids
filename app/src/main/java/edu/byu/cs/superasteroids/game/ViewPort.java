@@ -1,5 +1,6 @@
 package edu.byu.cs.superasteroids.game;
 
+import android.graphics.PointF;
 import android.graphics.RectF;
 
 /**
@@ -25,6 +26,9 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    public PointF convertToView(PointF position){
+        return null;
+    }
 /*
 CONSTANTS/FINALS
  */

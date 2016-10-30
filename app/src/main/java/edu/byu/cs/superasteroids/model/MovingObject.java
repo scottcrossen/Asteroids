@@ -43,7 +43,7 @@ METHODS
     /**
      * Redraw the object according to how much time has past.
      */
-    public void update(){}
+    public void update(double elapsedTime){}
 /*
 CONSTANTS/FINALS
  */

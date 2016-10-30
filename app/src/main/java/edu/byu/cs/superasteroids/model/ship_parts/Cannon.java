@@ -45,6 +45,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    @Override
+    public MountPoint getBodyAttachPoint(MainBody main_body)
+    {
+        return main_body.getCannonAttach();
+    }
 /*
 CONSTANTS/FINALS
  */

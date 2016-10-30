@@ -2,6 +2,7 @@ package edu.byu.cs.superasteroids.model.ship_parts;
 
 import android.graphics.PointF;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,8 +59,8 @@ CONSTRUCTORS
     /**
      * The constructor for the ship object.
      */
-    private Ship() {    //private because its a singleton
-        super(new Image(null, 650, 650), new PointF(0, 0), 0, 0);
+    private Ship() {
+            super(new Image(null, 650, 650), new PointF(0, 0), 0, 0);
     }
 /*
 METHODS
@@ -81,15 +82,51 @@ METHODS
     /**
      * Update the ship on the screen.
      */
-    @Override
-    public void update(){}
     /**
      * Updates the ship on the screen for a given elapsed time.
      * @param elapsedTime   the time elapsed.
      */
+    @Override
     public void update(double elapsedTime){}
-    public boolean isComplete(){return false;}
+    public boolean isComplete()
+    {
+        if (main_body != null &&
+                extrapart != null &&
+                cannon != null &&
+                powercore != null &&
+                engine != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    @Override
+    public void draw() {
+        draw(getViewCoords());
+        Iterator<Projectile> bullet_index = bullets.iterator();
+        while (bullet_index.hasNext()) {
+            bullet_index.next().draw();
+        }
+    }
+    private void draw(PointF position){
+        draw(position,getScale());
+    }
     public void draw(PointF position, float scale){
+        if (main_body != null) {
+            main_body.draw(position, main_body, getRotation(), scale);
+            if (extrapart != null) {
+                extrapart.draw(position, main_body, getRotation(), scale);
+            }
+            if (cannon != null) {
+                cannon.draw(position, main_body, getRotation(), scale);
+            }
+            if (engine != null) {
+                engine.draw(position, main_body, getRotation(), scale);
+            }
+        }
 
     }
 /*
@@ -98,41 +135,35 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    public List<Projectile> getProjectiles()
+{
+    return bullets;
+}
     /**
      * The getter for the main-body
      * @return  the main-body
      */
-    public MainBody getMainBody() {
-        return main_body;
-    }
+    public MainBody getMainBody() {return main_body;}
     /**
      * The setter of the main-body
      * @param main_body the main-body
      */
-    public void setMainBody(MainBody main_body) {
-        this.main_body = main_body;
-    }
+    public void setMainBody(MainBody main_body) {this.main_body = main_body;}
     /**
      * The getter of the cannon
      * @return  the cannon
      */
-    public Cannon getCannon() {
-        return cannon;
-    }
+    public Cannon getCannon() {return cannon;}
     /**
      * The setter of the cannon
      * @param cannon    the cannon
      */
-    public void setCannon(Cannon cannon) {
-        this.cannon = cannon;
-    }
+    public void setCannon(Cannon cannon) {this.cannon = cannon;}
     /**
      * The getter of the extra part
      * @return  the extra-part
      */
-    public ExtraPart getExtraPart() {
-        return extrapart;
-    }
+    public ExtraPart getExtraPart() {return extrapart;}
     /**
      * The settter of the extra-part
      * @param extrapart the extra-part

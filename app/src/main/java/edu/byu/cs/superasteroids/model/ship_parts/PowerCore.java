@@ -36,6 +36,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    @Override
+    public MountPoint getBodyAttachPoint(MainBody main_body)
+    {
+        return null;
+    }
 /*
 CONSTANTS/FINALS
  */

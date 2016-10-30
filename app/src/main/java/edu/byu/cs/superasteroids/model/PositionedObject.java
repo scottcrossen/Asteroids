@@ -2,6 +2,8 @@ package edu.byu.cs.superasteroids.model;
 
 import android.graphics.PointF;
 
+import edu.byu.cs.superasteroids.game.ViewPort;
+
 /**
  * Any object that has an x,y coordinate is considered a positioned object.
  * @author Scott Leland Crossen
@@ -10,6 +12,7 @@ public abstract class PositionedObject extends VisibleObject{
 /*
 FIELDS
  */
+    protected ViewPort view_port;
     /**
      * The position of the object.
      */
@@ -40,6 +43,10 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+public PointF getViewCoords()
+{
+    return view_port.convertToView(position);
+}
     /**
      * The getter for position
      * @return  the current position of the object
