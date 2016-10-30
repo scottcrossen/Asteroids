@@ -37,6 +37,9 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    public void setContentID(int content_id){
+
+    }
 /*
 CONSTANTS/FINALS
  */
