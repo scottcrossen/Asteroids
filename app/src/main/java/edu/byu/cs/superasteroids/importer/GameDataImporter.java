@@ -45,6 +45,9 @@ METHODS
         try {
             db.dao.importJSON(root_obj);
         } catch (org.json.JSONException e) {
+            debug.output("Failed while reading JSON:");
+            debug.output(root_obj.toString());
+            debug.printFlags(1);
             return false;
         }
         return true;
@@ -56,7 +59,7 @@ METHODS
         while ((n = reader.read(buf)) > 0) {
             sb.append(buf, 0, n);
         }
-        debug.output("Reading in JSON file:");
+        debug.output("Reading in JSON:");
         debug.output(sb.toString());
         return sb.toString();
     }

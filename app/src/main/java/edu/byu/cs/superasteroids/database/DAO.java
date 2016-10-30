@@ -63,14 +63,23 @@ METHODS
         //clearAll(); // I'll handle this in the GameDataImporter
         debug.output("Now Importing JSON");
         JSONObject root_node = root_object.getJSONObject("asteroidsGame");
-        //addBGobjects(root_object);
-        //addAsteroids(root_object);
-        //addLevels(root_object);
-        //addMainBodies(root_object);
-        //addCannons(root_object);
-        //addExtraParts(root_object);
-        //addEngines(root_object);
-        //addPowerCores(root_object);
+        debug.flag(0);
+        addBGobjects(root_node);
+        debug.flag(1);
+        addAsteroids(root_node);
+        debug.flag(2);
+        addLevels(root_node);
+        debug.flag(3);
+        addMainBodies(root_node);
+        debug.flag(4);
+        addCannons(root_node);
+        debug.flag(5);
+        addExtraParts(root_node);
+        debug.flag(6);
+        addEngines(root_node);
+        debug.flag(7);
+        addPowerCores(root_node);
+        debug.flag(8);
         debug.output("JSON Imported");
     }
     /**
@@ -84,7 +93,9 @@ METHODS
      * @param root_node     the JSONObject to read in.
      */
     private void addBGobjects(JSONObject root_node) throws org.json.JSONException {
+        debug.flag(9);
         JSONArray background_objects = root_node.getJSONArray("objects");
+        debug.flag(10);
         for(int iter1=0; iter1<background_objects.length(); ++iter1){
             ContentValues values=new ContentValues();
             values.put("image_path", background_objects.getString(iter1));
