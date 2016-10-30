@@ -69,5 +69,3 @@ GETTERS/SETTERS
         return image;
     }
 }
-//TODO: create debug class with extent.
-//TODO: make sure name-scheme is correct

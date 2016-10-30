@@ -93,9 +93,7 @@ METHODS
      * @param root_node     the JSONObject to read in.
      */
     private void addBGobjects(JSONObject root_node) throws org.json.JSONException {
-        debug.flag(9);
         JSONArray background_objects = root_node.getJSONArray("objects");
-        debug.flag(10);
         for(int iter1=0; iter1<background_objects.length(); ++iter1){
             ContentValues values=new ContentValues();
             values.put("image_path", background_objects.getString(iter1));
@@ -275,33 +273,25 @@ METHODS
      * @return              the desired level data
      */
     public Level getLevel(int level_number) {
+        debug.flag(9);
         List<BackgroundObject> level_objects = getLevelObjects(level_number);
         List<Asteroid> level_asteroids = getLevelAsteroids(level_number);
         Cursor cursor = db.rawQuery(GET_LEVEL_SQL, new String[]{Integer.toString(level_number)});
-        Level to_return;
+        Level output;
         try {
             cursor.moveToFirst();
-            if (!cursor.isAfterLast())
-            {
-                to_return = new Level(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getInt(3),
-                        cursor.getInt(4),
-                        cursor.getString(5),
-                        level_objects,
-                        level_asteroids);
+            if (!cursor.isAfterLast()) {
+                output = new Level(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getInt(3), cursor.getInt(4), cursor.getString(5), level_objects, level_asteroids);
             }
-            else
-            {
-                to_return = null;
+            else {
+                output = null;
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
     /**
      * This method gets the list of level objects contained in the database.
@@ -309,28 +299,23 @@ METHODS
      * @return      the list of level-objects
      */
     public List<BackgroundObject> getLevelObjects(int level_number) {
-        List<BackgroundObject> level_objects = new LinkedList<>();
+        debug.flag(10);
+        List<BackgroundObject> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_LEVEL_OBJECTS_SQL, new String[]{Integer.toString(level_number)});
         try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast())
-            {
-                /*
+            while (!cursor.isAfterLast()) {
                 BackgroundObject current_object = new BackgroundObject(
-                        new Image(cursor.getString(0), -1, -1),
-                        new PointF(
-                                cursor.getInt(1),
-                                cursor.getInt(2)),
-                        cursor.getInt(3),
-                        cursor.getFloat(3));
-                level_objects.add(current_object);*/
+                    new Image(cursor.getString(0), -1, -1),
+                    new PointF(cursor.getInt(1), cursor.getInt(2)), cursor.getInt(3), cursor.getFloat(3));
+                output.add(current_object);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return level_objects;
+        return output;
     }
     /**
      * This method gets the list of asteroids contained in the database for a certain level.
@@ -338,33 +323,28 @@ METHODS
      * @return      the list of asteroids for a given level-index
      */
     public List<Asteroid> getLevelAsteroids(int level_number) {
-        List<Asteroid> level_asteroids = new LinkedList<>();
+        debug.flag(11);
+        List<Asteroid> output = new LinkedList<Asteroid>();
         Cursor cursor = db.rawQuery(GET_LEVEL_ASTEROIDS_SQL, new String[]{Integer.toString(level_number)});
         try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast())
-            {
+            while (!cursor.isAfterLast()) {
                 int number = cursor.getInt(0);
                 String atype = cursor.getString(1);
                 String image_path = cursor.getString(2);
                 int image_width = cursor.getInt(3);
                 int image_height = cursor.getInt(4);
                 for (int added_count = 0; added_count < number; added_count++){
-                    /*
-                    if (atype.equals("regular"))
-                    {
-                        level_asteroids.add(new RegularAsteroid(new Image(image_path, image_width, image_height)));
+                    if (atype.equals("regular")) {
+                        output.add(new RegularAsteroid(new Image(image_path, image_width, image_height)));
                     }
-                    else if (atype.equals("growing"))
-                    {
-                        level_asteroids.add(new GrowingAsteroid(new Image(image_path, image_width, image_height)));
+                    else if (atype.equals("growing")) {
+                        output.add(new GrowingAsteroid(new Image(image_path, image_width, image_height)));
                     }
-                    else if (atype.equals("octeroid"))
-                    {
-                        level_asteroids.add(new Octaroid(new Image(image_path, image_width, image_height)));
+                    else if (atype.equals("octeroid")) {
+                        output.add(new Octaroid(new Image(image_path, image_width, image_height)));
                     }
-                    else*/
-                    {
+                    else{
                         assert false;
                     }
                 }
@@ -374,171 +354,123 @@ METHODS
         finally {
             cursor.close();
         }
-        return level_asteroids;
+        return output;
     }
     /**
      * This method gets the list of main-bodies contained in the database.
      * @return      the list of main-bodies.
      */
     public List<MainBody> getMainBodies() {
-        List<MainBody> to_return = new LinkedList<>();
+        debug.flag(12);
+        List<MainBody> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_MAINBODIES_SQL, new String[]{});
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Image image = new Image(
-                        cursor.getString(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2));
-                MainBody main_body = new MainBody(
-                        image,
-                        new MountPoint(
-                                cursor.getInt(3),
-                                cursor.getInt(4),
-                                image),
-                        new MountPoint(
-                                cursor.getInt(5),
-                                cursor.getInt(6),
-                                image),
-                        new MountPoint(
-                                cursor.getInt(7),
-                                cursor.getInt(8),
-                                image));
-                to_return.add(main_body);
+                Image image = new Image(cursor.getString(0), cursor.getInt(1), cursor.getInt(2));
+                MainBody main_body = new MainBody(image,
+                    new MountPoint(cursor.getInt(3), cursor.getInt(4), image),
+                    new MountPoint(cursor.getInt(5), cursor.getInt(6), image),
+                    new MountPoint(cursor.getInt(7), cursor.getInt(8), image));
+                output.add(main_body);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
     /**
      * This method gets the list of cannons contained in the database.
      * @return      the list of cannons.
      */
     public List<Cannon> getCannons() {
-        List<Cannon> to_return = new LinkedList<>();
+        debug.flag(13);
+        List<Cannon> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_CANNONS_SQL, new String[]{});
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Image image = new Image(
-                        cursor.getString(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2));
-                Cannon cannon = new Cannon(
-                        image,
-                        new MountPoint(
-                                cursor.getInt(3),
-                                cursor.getInt(4),
-                                image),
-                        new MountPoint(
-                                cursor.getInt(5),
-                                cursor.getInt(6),
-                                image),
-                        new Image(
-                                cursor.getString(7),
-                                cursor.getInt(8),
-                                cursor.getInt(9)),
-                        cursor.getString(10),
-                        cursor.getInt(11));
-                to_return.add(cannon);
+                Image image = new Image(cursor.getString(0), cursor.getInt(1), cursor.getInt(2));
+                Cannon cannon = new Cannon(image,
+                    new MountPoint(cursor.getInt(3), cursor.getInt(4), image),
+                    new MountPoint(cursor.getInt(5), cursor.getInt(6), image),
+                    new Image(cursor.getString(7), cursor.getInt(8), cursor.getInt(9)),
+                    cursor.getString(10), cursor.getInt(11));
+                output.add(cannon);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
     /**
      * This method gets the list of extra-parts contained in the database.
      * @return      the list of extra-parts.
      */
     public List<ExtraPart> getExtraParts() {
-        List<ExtraPart> to_return = new LinkedList<>();
+        debug.flag(14);
+        List<ExtraPart> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_EXTRAPARTS_SQL, new String[]{});
         try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast())
-            {
-                Image image = new Image(
-                        cursor.getString(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2));
-                ExtraPart extra_part = new ExtraPart(
-                        image,
-                        new MountPoint(
-                                cursor.getInt(3),
-                                cursor.getInt(4),
-                                image));
-                to_return.add(extra_part);
+            while (!cursor.isAfterLast()) {
+                Image image = new Image(cursor.getString(0), cursor.getInt(1), cursor.getInt(2));
+                ExtraPart extra_part = new ExtraPart(image, new MountPoint(cursor.getInt(3), cursor.getInt(4), image));
+                output.add(extra_part);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
     /**
      * This method gets the list of engines contained in the database.
      * @return      the list of engines.
      */
     public List<Engine> getEngines() {
-        List<Engine> to_return = new LinkedList<>();
+        debug.flag(15);
+        List<Engine> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_ENGINES_SQL, new String[]{});
         try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast())
-            {
-                Image image = new Image(
-                        cursor.getString(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2));
-                Engine engine = new Engine(
-                        image,
-                        new MountPoint(
-                                cursor.getInt(3),
-                                cursor.getInt(4),
-                                image),
-                        cursor.getInt(5),
-                        cursor.getInt(6));
-
-                to_return.add(engine);
-
+            while (!cursor.isAfterLast()) {
+                Image image = new Image(cursor.getString(0), cursor.getInt(1), cursor.getInt(2));
+                Engine engine = new Engine(image, new MountPoint(cursor.getInt(3), cursor.getInt(4), image), cursor.getInt(5), cursor.getInt(6));
+                output.add(engine);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
     /**
      * This method gets the list of power-cores contained in the database.
      * @return      the list of power-cores
      */
     public List<PowerCore> getPowerCores() {
-        List<PowerCore> to_return = new LinkedList<>();
+        debug.flag(16);
+        List<PowerCore> output = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_POWERCORES_SQL, new String[]{});
         try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast())
-            {
-                PowerCore power_core = new PowerCore(
-                        new Image(cursor.getString(0), -1, -1),
-                        cursor.getInt(1),
-                        cursor.getInt(2));
-                to_return.add(power_core);
+            while (!cursor.isAfterLast()) {
+                PowerCore power_core = new PowerCore(new Image(cursor.getString(0), -1, -1), cursor.getInt(1), cursor.getInt(2));
+                output.add(power_core);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return to_return;
+        return output;
     }
 /*
 CONSTANTS/FINALS

@@ -18,9 +18,8 @@ CONSTRUCTORS
     /**
      * The constructor for this type of asteroid
      * @param image     the image of the asteroid.
-     * @param _map_coords    the location of the created asteroid on the map
      */
-    public Octaroid(Image image, PointF _map_coords) {
+    public Octaroid(Image image) {
         super(image);
     }
 /*

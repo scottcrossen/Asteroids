@@ -10,6 +10,11 @@ public class BackgroundObject extends PositionedObject {
 /*
 FIELDS
  */
+    /**
+     * the scale is the factor to resize the image by
+     */
+    private float scale;
+    private int id;
 /*
 CONSTRUCTORS
  */
@@ -17,10 +22,14 @@ CONSTRUCTORS
      * The constructor for a background object
      * @param image     how the object looks
      * @param position  where the object is located.
+     * @param _id       the id of the object
+     * @param _scale    the scale of the image
      */
-    public BackgroundObject(Image image, PointF position) {
-        //include scale here that changes "visible object" scale.
+    public BackgroundObject(Image image, PointF position, int _id, float _scale)
+    {
         super(image, position);
+        scale = _scale;
+        id = _id;
     }
 /*
 METHODS
