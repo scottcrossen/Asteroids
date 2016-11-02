@@ -18,6 +18,10 @@ public abstract class Asteroid extends MovingObject {
 /*
 FIELDS
  */
+
+    private float level_width;
+
+    private float level_height;
 /*
 CONSTRUCTORS
  */
@@ -82,12 +86,7 @@ public void update(double elapsedTime) {
         direction = (int)(Math.random() * 360);
     }
 
-    private float level_width;
-
-    private float level_height;
-
-    public boolean isGrowing()
-    {
+    public boolean isGrowing() {
         return false;
     }
 /*

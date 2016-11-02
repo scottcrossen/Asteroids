@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.content.ContentManager;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.game.ViewPort;
@@ -217,7 +218,7 @@ METHODS
         ContentManager.getInstance().playLoop(music_id);
     }
     public void drawTransition() {
-        DrawingHelper.drawCenteredText("Level " + Integer.toString(level_number) + " - " + hint, 100, Color.WHITE);
+        DrawingHelper.drawCenteredText("Level " + Integer.toString(level_number) + " - " + hint, (int)(100.0*(DrawingHelper.getGameViewWidth()/1500.0)), Color.WHITE);
     }
     public void setViewPort(ViewPort _viewport) {
         viewport = _viewport;

@@ -65,13 +65,6 @@ CONSTRUCTORS
 METHODS
  */
     /**
-     * The getter of the only-allowed instance of the ship.
-     * @return  the current ship
-     */
-    public static Ship getInstance() {
-        return ourInstance;
-    }
-    /**
      * Creates a new ship.
      */
     public static Ship createNew() {
@@ -205,10 +198,10 @@ GETTERS/SETTERS
         return bullets;
     }
     /**
-     * The getter for the ship
+     * The getter of the only-allowed instance of the ship.
      * @return  the current ship
      */
-    public static Ship getOurInstance() {
+    public static Ship getInstance() {
         return ourInstance;
     }
     /**

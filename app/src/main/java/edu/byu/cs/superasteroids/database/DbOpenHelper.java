@@ -54,8 +54,7 @@ METHODS
      * This method is called to "reset" the database.
      * @param db    the sqlitedatabase that is being created.
      */
-    public static void dropAndCreate(SQLiteDatabase db)
-    {
+    public static void dropAndCreate(SQLiteDatabase db) {
         dropTables(db);
         createTables(db);
     }
@@ -63,8 +62,7 @@ METHODS
      * This method drops tables: ALL
      * @param db    the sqlitedatabase that is being created.
      */
-    public static void dropTables(SQLiteDatabase db)
-    {
+    public static void dropTables(SQLiteDatabase db) {
         db.execSQL(DROP_TABLE_BGOBJECT_SQL);
         db.execSQL(DROP_TABLE_ASTEROIDS_SQL);
         db.execSQL(DROP_TABLE_LEVELS_SQL);
@@ -80,8 +78,7 @@ METHODS
      * This method calls the create statements on the database
      * @param db    the sqlitedatabase that is being created.
      */
-    public static void createTables(SQLiteDatabase db)
-    {
+    public static void createTables(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_BGOBJECTS_SQL);
         db.execSQL(CREATE_TABLE_ASTEROIDS_SQL);
         db.execSQL(CREATE_TABLE_LEVELS_SQL);

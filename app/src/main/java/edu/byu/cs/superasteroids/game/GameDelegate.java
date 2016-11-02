@@ -20,7 +20,7 @@ public class GameDelegate implements IGameDelegate {
 FIELDS
  */
     enum GAME_STATE {GAME_OVER, GAME_WON, PLAYING,TRANSITION}
-    private Ship ship;
+    private Ship ship=Ship.getInstance();
     private Level current_level;
     private Database database;
     private ViewPort viewport;
@@ -28,8 +28,8 @@ FIELDS
     private Space space;
     private GAME_STATE game_state=GAME_STATE.TRANSITION;
     private double transition_time_left=TRANSITION_TIME;
+    private MiniMap minimap;
     private Debug debug=new Debug(4);
-
 /*
 CONSTRUCTORS
  */
@@ -53,11 +53,13 @@ METHODS
         if(current_level==null)
             game_state=GAME_STATE.GAME_WON;
         else{
+            minimap = new MiniMap(current_level, ship);
             game_state=GAME_STATE.TRANSITION;
             space=new Space(current_level.getBound());
             ship.setMapCoords(current_level.getCenter());
             viewport=new ViewPort(ship, current_level.getBound());
             current_level.setViewPort(viewport);
+            ship.setViewPort(viewport);
             space.setViewPort(viewport);
             space.setScale(current_level.getWidth(), current_level.getHeight());
             loadLevelContent();
@@ -79,7 +81,7 @@ METHODS
     public void update(double elapsedTime) {
         if(game_state==GAME_STATE.TRANSITION){
             transition_time_left-=elapsedTime;
-            if(transition_time_left<=0)
+            if(transition_time_left<0)
                 game_state=GAME_STATE.PLAYING;
         }
         else if(game_state==GAME_STATE.PLAYING){
@@ -123,25 +125,30 @@ METHODS
     public void draw() {
         switch(game_state) {
             case GAME_WON:
-                DrawingHelper.drawCenteredText("You beat all the level!", 100, Color.WHITE);
+                DrawingHelper.drawCenteredText("You beat all the level!", (int)(100.0*(DrawingHelper.getGameViewWidth()/TEXT_SCALE)), Color.WHITE);
                 break;
             case GAME_OVER:
-                debug.output("Printing loser message");
-                debug.output("Screen width: " + Integer.toString(DrawingHelper.getGameViewWidth()));
-                debug.output("Screen height: " + Integer.toString(DrawingHelper.getGameViewHeight()));
-                DrawingHelper.drawCenteredText("You died. Push Back", 100, Color.WHITE);
+                DrawingHelper.drawCenteredText("You died. Push Back",(int)(100.0*(DrawingHelper.getGameViewWidth()/TEXT_SCALE)), Color.WHITE);
+                break;
             case TRANSITION:
-                current_level.drawTransition();
+                DrawingHelper.drawCenteredText("Level " + Integer.toString(current_level.getLevel_number()) + " - " + current_level.getHint(), (int) (100.0 * (DrawingHelper.getGameViewWidth() / TEXT_SCALE)), Color.WHITE);
+                break;
             case PLAYING:
                 space.draw();
                 current_level.draw();
                 ship.draw();
+                minimap.draw();
+                break;
+            default:
+                assert false;
+                break;
         }
     }
 /*
 CONSTANTS/FINALS
  */
     private static final double TRANSITION_TIME=5;
+    private static final double TEXT_SCALE=1500.0;
 /*
 GETTERS/SETTERS
  */

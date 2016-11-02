@@ -60,18 +60,16 @@ METHODS
         }
     }
     public PointF convertToViewPort(PointF position){
-        if(position.x>=dimensions.left && position.x<=dimensions.right && position.y>=dimensions.bottom && position.y<=dimensions.top)
-            return new PointF(position.x-dimensions.left,position.y-dimensions.top);
-        else return null;
+        return new PointF(position.x - dimensions.left, position.y - dimensions.top);
     }
-    /*
-    public Rect convertToView(RectF bounds){
+
+    /*public Rect convertToViewPort(RectF bounds){
         return new Rect((int)(bounds.left - dimensions.left),
             (int)(bounds.top - dimensions.top),
             (int)(bounds.right - dimensions.left),
             (int)(bounds.bottom - dimensions.top));
-    }
-     */
+    }*/
+
 /*
 CONSTANTS/FINALS
  */

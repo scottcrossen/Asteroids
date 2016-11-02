@@ -42,6 +42,11 @@ CONSTRUCTORS
     public Cannon(Image image, MountPoint mount_point, MountPoint _nozzle, Image _attack_image, String _attack_sound, int _damage)
     {
         super(image, mount_point);
+        nozzle = _nozzle;
+        attack_image = _attack_image;
+        attack_sound = _attack_sound;
+        damage = _damage;
+        attack_sound_content_id = -1;
     }
 /*
 METHODS
@@ -66,10 +71,10 @@ GETTERS/SETTERS
     }
     /**
      * The setter of the projectile image.
-     * @param attack_image   the projectile image.
+     * @param _attack_image   the projectile image.
      */
-    public void setAttackImage(Image attack_image) {
-        this.attack_image = attack_image;
+    public void setAttackImage(Image _attack_image) {
+        attack_image = _attack_image;
     }
     /**
      * The setter of the projectile sound.
@@ -80,10 +85,10 @@ GETTERS/SETTERS
     }
     /**
      * The setter of the projectile sound.
-     * @param attack_sound  the projectile sound.
+     * @param _attack_sound  the projectile sound.
      */
-    public void setAttackSound(String attack_sound) {
-        this.attack_sound = attack_sound;
+    public void setAttackSound(String _attack_sound) {
+        attack_sound = attack_sound;
     }
     /**
      * The getter for the damage the cannon does

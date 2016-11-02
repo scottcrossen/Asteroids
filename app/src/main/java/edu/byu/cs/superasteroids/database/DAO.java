@@ -298,16 +298,36 @@ METHODS
      * @param level_number      the queried level index
      * @return      the list of level-objects
      */
-    public List<BackgroundObject> getLevelObjects(int level_number) {
+    private List<BackgroundObject> getLevelObjects(int level_number) {
+        final String LEVEL_OBJECTS_SQL =
+                "select " +
+                        "imagepath, " +
+                        "position_x," +
+                        "position_y, " +
+                        "object_id, " +
+                        "scale " +
+                        "from " +
+                        "BackgroundObjects, " +
+                        "LevelBackgroundObjects " +
+                        "where " +
+                        "BackgroundObjects.id = LevelBackgroundObjects.object_id and " +
+                        "level_number = ?";
+
         List<BackgroundObject> level_objects = new LinkedList<>();
-        Cursor cursor = db.rawQuery(GET_LEVEL_OBJECTS_SQL, new String[]{Integer.toString(level_number)});
+        Cursor cursor = db.rawQuery(LEVEL_OBJECTS_SQL, new String[]{Integer.toString(level_number)});
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 BackgroundObject current_object = new BackgroundObject(
                         new Image(cursor.getString(0), -1, -1),
-                        new PointF(cursor.getInt(1), cursor.getInt(2)), cursor.getInt(3), cursor.getFloat(3));
+                        new PointF(
+                                cursor.getInt(1),
+                                cursor.getInt(2)),
+                        cursor.getInt(3),
+                        cursor.getFloat(3));
+
                 level_objects.add(current_object);
+
                 cursor.moveToNext();
             }
         }
