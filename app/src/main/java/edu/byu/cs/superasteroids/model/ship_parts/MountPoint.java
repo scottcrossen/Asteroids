@@ -28,8 +28,8 @@ CONSTRUCTORS
      */
     public MountPoint(int _x, int _y, Image image)
     {
-        x = _x /*- image.getWidth()/2*/;
-        y = _y /*- image.getHeight()/2*/;
+        x = _x - image.getWidth()/2;
+        y = _y - image.getHeight()/2;
     }
     /**
      * the constructor for the mount-point class
