@@ -18,7 +18,7 @@ import edu.byu.cs.superasteroids.model.Image;
 import edu.byu.cs.superasteroids.model.Level;
 import edu.byu.cs.superasteroids.model.asteroids.Asteroid;
 import edu.byu.cs.superasteroids.model.asteroids.GrowingAsteroid;
-import edu.byu.cs.superasteroids.model.asteroids.Octaroid;
+import edu.byu.cs.superasteroids.model.asteroids.Octeroid;
 import edu.byu.cs.superasteroids.model.asteroids.RegularAsteroid;
 import edu.byu.cs.superasteroids.model.ship_parts.Cannon;
 import edu.byu.cs.superasteroids.model.ship_parts.Engine;
@@ -299,23 +299,22 @@ METHODS
      * @return      the list of level-objects
      */
     public List<BackgroundObject> getLevelObjects(int level_number) {
-        debug.flag(10);
-        List<BackgroundObject> output = new LinkedList<>();
+        List<BackgroundObject> level_objects = new LinkedList<>();
         Cursor cursor = db.rawQuery(GET_LEVEL_OBJECTS_SQL, new String[]{Integer.toString(level_number)});
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 BackgroundObject current_object = new BackgroundObject(
-                    new Image(cursor.getString(0), -1, -1),
-                    new PointF(cursor.getInt(1), cursor.getInt(2)), cursor.getInt(3), cursor.getFloat(3));
-                output.add(current_object);
+                        new Image(cursor.getString(0), -1, -1),
+                        new PointF(cursor.getInt(1), cursor.getInt(2)), cursor.getInt(3), cursor.getFloat(3));
+                level_objects.add(current_object);
                 cursor.moveToNext();
             }
         }
         finally {
             cursor.close();
         }
-        return output;
+        return level_objects;
     }
     /**
      * This method gets the list of asteroids contained in the database for a certain level.
@@ -342,7 +341,7 @@ METHODS
                         output.add(new GrowingAsteroid(new Image(image_path, image_width, image_height)));
                     }
                     else if (atype.equals("octeroid")) {
-                        output.add(new Octaroid(new Image(image_path, image_width, image_height)));
+                        output.add(new Octeroid(new Image(image_path, image_width, image_height)));
                     }
                     else{
                         assert false;

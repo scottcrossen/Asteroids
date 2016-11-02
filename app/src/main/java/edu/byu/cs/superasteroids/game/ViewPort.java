@@ -1,7 +1,11 @@
 package edu.byu.cs.superasteroids.game;
 
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
+
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 
 /**
  * The object that shows the visible section of the screen.
@@ -20,15 +24,54 @@ FIELDS
      * The dimension of the level.
      */
     private RectF level_dimensions;
+    private Ship ship;
 /*
 CONSTRUCTORS
  */
+    public ViewPort(Ship _ship, RectF _level_dimensions){
+        ship=_ship;
+        level_dimensions=_level_dimensions;
+        update();
+    }
 /*
 METHODS
  */
-    public PointF convertToView(PointF position){
-        return null;
+    public void update(){
+        dimensions = new RectF(
+                ship.getMapCoords().x - DrawingHelper.getGameViewWidth()/2,
+                ship.getMapCoords().y - DrawingHelper.getGameViewHeight()/2,
+                ship.getMapCoords().x + DrawingHelper.getGameViewWidth()/2,
+                ship.getMapCoords().y + DrawingHelper.getGameViewHeight()/2);
+        if (dimensions.bottom > level_dimensions.bottom) {
+            dimensions.bottom = level_dimensions.bottom;
+            dimensions.top = level_dimensions.bottom - dimensions.height();
+        }
+        if (dimensions.right > level_dimensions.right) {
+            dimensions.right = level_dimensions.right;
+            dimensions.left = dimensions.right - dimensions.width();
+        }
+        if (dimensions.top < level_dimensions.top) {
+            dimensions.top = level_dimensions.top;
+            dimensions.bottom = dimensions.top + dimensions.height();
+        }
+        if (dimensions.left < level_dimensions.left) {
+            dimensions.left = level_dimensions.left;
+            dimensions.right = dimensions.left + dimensions.width();
+        }
     }
+    public PointF convertToViewPort(PointF position){
+        if(position.x>=dimensions.left && position.x<=dimensions.right && position.y>=dimensions.bottom && position.y<=dimensions.top)
+            return new PointF(position.x-dimensions.left,position.y-dimensions.top);
+        else return null;
+    }
+    /*
+    public Rect convertToView(RectF bounds){
+        return new Rect((int)(bounds.left - dimensions.left),
+            (int)(bounds.top - dimensions.top),
+            (int)(bounds.right - dimensions.left),
+            (int)(bounds.bottom - dimensions.top));
+    }
+     */
 /*
 CONSTANTS/FINALS
  */

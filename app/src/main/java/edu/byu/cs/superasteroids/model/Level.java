@@ -213,13 +213,22 @@ METHODS
             level_asteroids.add(temp);
         }
     }
-    public void playMusic()
-    {
+    public void playMusic() {
         ContentManager.getInstance().playLoop(music_id);
     }
-    public void drawTransition()
-    {
+    public void drawTransition() {
         DrawingHelper.drawCenteredText("Level " + Integer.toString(level_number) + " - " + hint, 100, Color.WHITE);
+    }
+    public void setViewPort(ViewPort _viewport) {
+        viewport = _viewport;
+        Iterator<Asteroid> asteroid_index = level_asteroids.iterator();
+        while (asteroid_index.hasNext()) {
+            asteroid_index.next().setViewPort(_viewport);
+        }
+        Iterator<BackgroundObject> object_index = background_objects.iterator();
+        while (object_index.hasNext()) {
+            object_index.next().setViewPort(_viewport);
+        }
     }
 
 /*

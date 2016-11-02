@@ -26,6 +26,7 @@ FIELDS
      * The location of where the projectiles leave the cannon is stored here
      */
     private MountPoint nozzle;
+    private int attack_sound_content_id;
 /*
 CONSTRUCTORS
  */
@@ -88,6 +89,16 @@ GETTERS/SETTERS
      * The getter for the damage the cannon does
      * @return  the damage value.
      */
+    public int getAttackSoundID()
+    {
+        return attack_sound_content_id;
+    }
+
+    public void setAttackSoundID(int _id)
+    {
+        attack_sound_content_id = _id;
+    }
+
     public int getDamage() {
         return damage;
     }

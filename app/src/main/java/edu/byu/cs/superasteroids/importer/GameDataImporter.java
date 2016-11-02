@@ -11,7 +11,7 @@ import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.database.Database;
 
 /**
- * Created by slxn42 on 10/29/16.
+ * Created by Scott Leland Crossen
  */
 public class GameDataImporter implements IGameDataImporter {
 /*

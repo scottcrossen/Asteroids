@@ -69,7 +69,7 @@ GETTERS/SETTERS
         view_port = viewPort;
     }
     public PointF getViewCoords() {
-        return view_port.convertToView(position);
+        return view_port.convertToViewPort(position);
     }
     public PointF getMapCoords() {
         return position;
