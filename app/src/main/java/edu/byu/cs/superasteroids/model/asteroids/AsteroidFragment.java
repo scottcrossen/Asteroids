@@ -22,10 +22,17 @@ CONSTRUCTORS
      */
     public AsteroidFragment(Image image, PointF _map_coords) {
         super(image);
+        setScale((float) .5);
+        setMapCoords(_map_coords);
     }
 /*
 METHODS
  */
+    @Override
+    public int addUponDeletion()
+    {
+        return 0;
+    }
 /*
 CONSTANTS/FINALS
  */

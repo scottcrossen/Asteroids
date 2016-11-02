@@ -25,11 +25,11 @@ import edu.byu.cs.superasteroids.model.ship_parts.ShipPart;
  * Created by Scott Leland Crossen
  */
 public class ShipBuildingController implements IShipBuildingController {
-    /*
-    FIELDS
-     */
+/*
+FIELDS
+ */
     Debug debug=new Debug(3);
-    private static final double SHIP_SCALE = .5;
+    private static final double SHIP_SCALE = .75;
     private IShipBuildingView.PartSelectionView state;
     private IShipBuildingView view;
     private List<Integer> main_body_ids;
@@ -45,9 +45,9 @@ public class ShipBuildingController implements IShipBuildingController {
     private Ship ship;
     private boolean content_loaded = false;
     private Map<IShipBuildingView.ViewDirection,IShipBuildingView.PartSelectionView> arrows=new HashMap<>();
-    /*
-    CONSTRUCTORS
-     */
+/*
+CONSTRUCTORS
+ */
     ShipBuildingController(ShipBuildingActivity calling_instance){
         Database db=new Database(calling_instance);
         view=calling_instance;
@@ -74,44 +74,44 @@ METHODS
         state = partView;
         switch (state) {
             case MAIN_BODY:
+                view.setPartViewImageList(state, main_body_ids);
                 arrows.put(IShipBuildingView.ViewDirection.LEFT, IShipBuildingView.PartSelectionView.ENGINE);
                 arrows.put(IShipBuildingView.ViewDirection.UP, IShipBuildingView.PartSelectionView.POWER_CORE);
                 arrows.put(IShipBuildingView.ViewDirection.DOWN, IShipBuildingView.PartSelectionView.CANNON);
                 arrows.put(IShipBuildingView.ViewDirection.RIGHT, IShipBuildingView.PartSelectionView.EXTRA_PART);
                 set_arrows();
-                view.setPartViewImageList(state, main_body_ids);
                 break;
             case ENGINE:
+                view.setPartViewImageList(state, engine_ids);
                 arrows.put(IShipBuildingView.ViewDirection.LEFT, IShipBuildingView.PartSelectionView.POWER_CORE);
                 arrows.put(IShipBuildingView.ViewDirection.UP, IShipBuildingView.PartSelectionView.CANNON);
                 arrows.put(IShipBuildingView.ViewDirection.RIGHT, IShipBuildingView.PartSelectionView.EXTRA_PART);
                 arrows.put(IShipBuildingView.ViewDirection.DOWN, IShipBuildingView.PartSelectionView.MAIN_BODY);
                 set_arrows();
-                view.setPartViewImageList(state, engine_ids);
                 break;
             case POWER_CORE:
+                view.setPartViewImageList(state, power_core_ids);
                 arrows.put(IShipBuildingView.ViewDirection.LEFT, IShipBuildingView.PartSelectionView.CANNON);
                 arrows.put(IShipBuildingView.ViewDirection.UP, IShipBuildingView.PartSelectionView.EXTRA_PART);
                 arrows.put(IShipBuildingView.ViewDirection.RIGHT, IShipBuildingView.PartSelectionView.MAIN_BODY);
                 arrows.put(IShipBuildingView.ViewDirection.DOWN, IShipBuildingView.PartSelectionView.ENGINE);
                 set_arrows();
-                view.setPartViewImageList(state, power_core_ids);
                 break;
             case CANNON:
+                view.setPartViewImageList(state, cannon_ids);
                 arrows.put(IShipBuildingView.ViewDirection.LEFT, IShipBuildingView.PartSelectionView.EXTRA_PART);
                 arrows.put(IShipBuildingView.ViewDirection.UP, IShipBuildingView.PartSelectionView.MAIN_BODY);
                 arrows.put(IShipBuildingView.ViewDirection.RIGHT, IShipBuildingView.PartSelectionView.ENGINE);
                 arrows.put(IShipBuildingView.ViewDirection.DOWN, IShipBuildingView.PartSelectionView.POWER_CORE);
                 set_arrows();
-                view.setPartViewImageList(state, cannon_ids);
                 break;
             case EXTRA_PART:
+                view.setPartViewImageList(state, extra_part_ids);
                 arrows.put(IShipBuildingView.ViewDirection.LEFT, IShipBuildingView.PartSelectionView.MAIN_BODY);
                 arrows.put(IShipBuildingView.ViewDirection.UP, IShipBuildingView.PartSelectionView.ENGINE);
                 arrows.put(IShipBuildingView.ViewDirection.RIGHT, IShipBuildingView.PartSelectionView.POWER_CORE);
                 arrows.put(IShipBuildingView.ViewDirection.DOWN, IShipBuildingView.PartSelectionView.CANNON);
                 set_arrows();
-                view.setPartViewImageList(state, extra_part_ids);
                 break;
             default:
                 assert false;
@@ -122,12 +122,12 @@ METHODS
     private void debug_state(){
         debug.output("State: "+part_selection_to_string(state));
         debug.output("Left: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
-        debug.output("Up: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
-        debug.output("Right: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
-        debug.output("Down: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
+        debug.output("Up: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        debug.output("Right: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        debug.output("Down: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
     }
     private void set_arrows(){
-        view.setArrow(state, IShipBuildingView.ViewDirection.LEFT, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
+        view.setArrow(state,IShipBuildingView.ViewDirection.LEFT,true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
         view.setArrow(state, IShipBuildingView.ViewDirection.UP, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
         view.setArrow(state, IShipBuildingView.ViewDirection.RIGHT, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
         view.setArrow(state, IShipBuildingView.ViewDirection.DOWN, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
@@ -150,27 +150,6 @@ METHODS
                 break;
             case EXTRA_PART:
                 output="Extra Parts";
-                break;
-            default:
-                assert false;
-                break;
-        }
-        return output;
-    }
-    private String view_direction_to_string(IShipBuildingView.ViewDirection view_direction){
-        String output = new String();
-        switch(view_direction){
-            case LEFT:
-                output="Left";
-                break;
-            case UP:
-                output="Up";
-                break;
-            case RIGHT:
-                output="Right";
-                break;
-            case DOWN:
-                output="Down";
                 break;
             default:
                 assert false;
@@ -224,7 +203,6 @@ METHODS
     }
     @Override
     public void onSlideView(IShipBuildingView.ViewDirection direction) {
-        debug.output("Arrow selected: "+view_direction_to_string(direction));
         IShipBuildingView.ViewDirection new_direction;
         switch (direction) {
             case UP:
@@ -242,7 +220,6 @@ METHODS
             default:
                 assert false;
                 new_direction = IShipBuildingView.ViewDirection.UP;
-                break;
         }
         state=arrows.get(new_direction);
         view.animateToView(state, new_direction);
@@ -253,7 +230,6 @@ METHODS
      */
     @Override
     public void onPartSelected(int index) {
-        debug.output("selected: " + part_selection_to_string(state)+ " with index "+Integer.toString(index));
         switch (state) {
             case MAIN_BODY:
                 ship.setMainBody(main_bodies.get(index));
@@ -285,10 +261,7 @@ METHODS
      * Draw the ship on the center of the screen.
      */
     @Override
-    public void draw() {
-        final PointF gameViewCenter = new PointF(DrawingHelper.getGameViewWidth() /2, DrawingHelper.getGameViewHeight() / 2);
-        ship.draw(gameViewCenter, (float)SHIP_SCALE);
-    }
+    public void draw() {ship.draw(gameViewCenter, (float) SHIP_SCALE);}
     /**
      * This starts the game when the button is pressed.
      */
@@ -298,7 +271,7 @@ METHODS
      * This refreshes the screen. Its probably not needed but oh well.
      */
     @Override
-    public void onResume() {/*onViewLoaded(state);*/}
+    public void onResume() {onViewLoaded(state);}
     /**
      * For this part the function is left blank
      * @param elapsedTime Time since the last update. For this game, elapsedTime is always
@@ -320,6 +293,7 @@ METHODS
 /*
 CONSTANTS/FINALS
  */
+    private final PointF gameViewCenter = new PointF(DrawingHelper.getGameViewWidth() /2, DrawingHelper.getGameViewHeight() / 2);
 /*
 GETTERS/SETTERS
  */

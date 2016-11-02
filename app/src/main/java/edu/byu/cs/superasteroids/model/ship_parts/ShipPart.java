@@ -2,6 +2,7 @@ package edu.byu.cs.superasteroids.model.ship_parts;
 
 import android.graphics.PointF;
 
+import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.model.Image;
@@ -22,6 +23,7 @@ FIELDS
      * The mount-point of the ship part.
      */
     protected MountPoint mount_point;
+    Debug debug;
 /*
 CONSTRUCTORS
  */
@@ -34,6 +36,7 @@ CONSTRUCTORS
     {
         image = _image;
         mount_point = _mount_point;
+        debug=new Debug();
     }
 /*
 METHODS
@@ -44,9 +47,6 @@ METHODS
      * @param rotation      the current rotation of the ship.
      * @param scale         the scale of the image
      */
-    public void draw(PointF ship_location/*, MainBody main_body*/, float rotation, float scale) {}
-    //This method is mainly used for polymorphism and connecting parts to ship
-    abstract public MountPoint getBodyAttachPoint(MainBody main_body);
     public void draw(PointF ship_location, MainBody main_body, float rotation, float scale) {
         PointF pic_center = new PointF(
                 scale*(getBodyAttachPoint(main_body).x - getMountPoint().x),
@@ -61,6 +61,8 @@ METHODS
                 scale,
                 255);
     }
+    //This method is mainly used for polymorphism and connecting parts to ship
+    abstract public MountPoint getBodyAttachPoint(MainBody main_body);
 /*
 CONSTANTS/FINALS
  */
@@ -80,5 +82,8 @@ GETTERS/SETTERS
      */
     public MountPoint getMountPoint() {
         return mount_point;
+    }
+    public void setMountPoint(MountPoint mount_point) {
+        this.mount_point = mount_point;
     }
 }

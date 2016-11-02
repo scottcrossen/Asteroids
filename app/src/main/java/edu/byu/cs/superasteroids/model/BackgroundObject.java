@@ -25,8 +25,7 @@ CONSTRUCTORS
      * @param _id       the id of the object
      * @param _scale    the scale of the image
      */
-    public BackgroundObject(Image image, PointF position, int _id, float _scale)
-    {
+    public BackgroundObject(Image image, PointF position, int _id, float _scale) {
         super(image, position);
         scale = _scale;
         id = _id;
@@ -40,4 +39,11 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    public float getScale() {
+    return scale;
+}
+
+    public int getID() {
+        return id;
+    }
 }

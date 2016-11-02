@@ -11,7 +11,7 @@ FIELDS
     /**
      * The rotation of the object's image on screen.
      */
-    private float rotation =(float)0;
+    private float rotation =0;
     /**
      * The scale of the image displayed.
      */
@@ -53,14 +53,17 @@ GETTERS/SETTERS
     /**
      * The setter for rotation
      */
-    public void setRotation(){}
+    public void setRotation(float _rotation){
+        if(_rotation<0) rotation=_rotation-360*(_rotation%360);
+        else if(_rotation>=360) rotation=_rotation+360*(_rotation%360);
+        else rotation=_rotation;
+    }
+    public void setScale(float _scale){scale=_scale;}
     /**
      * The getter for the image scale
      * @return  the image scale
      */
-    public float getScale() {
-        return scale;
-    }
+    public float getScale() {return scale;}
     /**
      * the getter for the image
      * @return  the image.
@@ -68,4 +71,5 @@ GETTERS/SETTERS
     public Image getImage() {
         return image;
     }
+    public void setImage(Image _image){image=_image;}
 }

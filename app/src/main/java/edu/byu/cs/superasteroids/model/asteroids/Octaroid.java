@@ -19,12 +19,17 @@ CONSTRUCTORS
      * The constructor for this type of asteroid
      * @param image     the image of the asteroid.
      */
-    public Octaroid(Image image) {
+    public Octaroid(Image image){
         super(image);
     }
 /*
 METHODS
  */
+    @Override
+    public int addUponDeletion()
+    {
+        return 8;
+    }
 /*
 CONSTANTS/FINALS
  */

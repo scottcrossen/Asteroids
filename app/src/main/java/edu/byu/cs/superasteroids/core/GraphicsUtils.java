@@ -137,8 +137,8 @@ public class GraphicsUtils {
      * @return A MoveObjectResult containing the object's new position and bounding rectangle
      */
     public static MoveObjectResult moveObject(PointF objPosition, RectF objBounds, double speed,
-                                                double angleCosine, double angleSine,
-                                                double elapsedTime) {
+                                              double angleCosine, double angleSine,
+                                              double elapsedTime) {
         MoveObjectResult result = new MoveObjectResult();
 
         double distance = speed * elapsedTime;
@@ -171,12 +171,12 @@ public class GraphicsUtils {
      * and direction angle
      */
     public static RicochetObjectResult ricochetObject(PointF objPosition, RectF objBounds,
-                                                        double angleRadians,
-                                                        float worldWidth, float worldHeight) {
+                                                      double angleRadians,
+                                                      float worldWidth, float worldHeight) {
         double angleCosine = Math.cos(angleRadians);
         double angleSine = Math.sin(angleRadians);
         return ricochetObject(objPosition, objBounds, angleRadians, angleCosine, angleSine,
-                                worldWidth, worldHeight);
+                worldWidth, worldHeight);
     }
 
     /**
@@ -196,9 +196,9 @@ public class GraphicsUtils {
      * and direction angle
      */
     public static RicochetObjectResult ricochetObject(PointF objPosition, RectF objBounds,
-                                                        double angleRadians,
-                                                        double angleCosine, double angleSine,
-                                                        float worldWidth, float worldHeight) {
+                                                      double angleRadians,
+                                                      double angleCosine, double angleSine,
+                                                      float worldWidth, float worldHeight) {
         RicochetObjectResult result = new RicochetObjectResult();
 
         PointF position = new PointF();

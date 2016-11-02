@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.byu.cs.superasteroids.content.ContentManager;
+import edu.byu.cs.superasteroids.core.GraphicsUtils;
+import edu.byu.cs.superasteroids.game.InputManager;
 import edu.byu.cs.superasteroids.model.Image;
 import edu.byu.cs.superasteroids.model.MovingObject;
 
@@ -17,10 +20,6 @@ public class Ship extends MovingObject {
 /*
 FIELDS
  */
-    /**
-     * The time it takes untill the ship can fire again.
-     */
-    private double time_until_fire = 0;
     /**
      * The main body of the ship.
      */
@@ -80,28 +79,11 @@ METHODS
         return getInstance();
     }
     /**
-     * Update the ship on the screen.
-     */
-    /**
      * Updates the ship on the screen for a given elapsed time.
      * @param elapsedTime   the time elapsed.
      */
     @Override
-    public void update(double elapsedTime){}
-    public boolean isComplete()
-    {
-        if (main_body != null &&
-                extrapart != null &&
-                cannon != null &&
-                powercore != null &&
-                engine != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+    public void update(double elapsedTime){
     }
     @Override
     public void draw() {
@@ -129,9 +111,25 @@ METHODS
         }
 
     }
+    public boolean isComplete() {
+        if (main_body != null &&
+                extrapart != null &&
+                cannon != null &&
+                powercore != null &&
+                engine != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 /*
 CONSTANTS/FINALS
  */
+    /**
+     * The time it takes untill the ship can fire again.
+     */
+    private static final double time_until_fire = 0;
 /*
 GETTERS/SETTERS
  */

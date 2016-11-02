@@ -2,6 +2,7 @@ package edu.byu.cs.superasteroids.model;
 
 import android.graphics.PointF;
 
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.game.ViewPort;
 
 /**
@@ -27,7 +28,12 @@ CONSTRUCTORS
      */
     public PositionedObject(Image image, PointF _position) {
         super(image);
-        position=_position;
+        if (_position != null) {
+            position = _position;
+        }
+        else {
+            position = new PointF(0, 0);
+        }
     }
 /*
 METHODS
@@ -36,17 +42,16 @@ METHODS
      * Draws the object if in the viewport.
      */
     @Override
-    public void draw(){}
+    public void draw() {
+        PointF view_coords = getViewCoords();
+        DrawingHelper.drawImage(image.getContentID(), view_coords.x, view_coords.y, getRotation(), getScale(), getScale(), 255);
+    }
 /*
 CONSTANTS/FINALS
  */
 /*
 GETTERS/SETTERS
  */
-public PointF getViewCoords()
-{
-    return view_port.convertToView(position);
-}
     /**
      * The getter for position
      * @return  the current position of the object
@@ -59,5 +64,17 @@ public PointF getViewCoords()
      */
     public void setPosition(PointF _position){
         position=_position;
+    }
+    public void setViewPort(ViewPort viewPort) {
+        view_port = viewPort;
+    }
+    public PointF getViewCoords() {
+        return view_port.convertToView(position);
+    }
+    public PointF getMapCoords() {
+        return position;
+    }
+    public void setMapCoords(PointF point) {
+        position = point;
     }
 }
