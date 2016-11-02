@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.content.ContentManager;
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.game.InputManager;
@@ -56,6 +57,7 @@ FIELDS
      * The time it takes untill the ship can fire again.
      */
     private double time_until_fire = 0;
+    private Debug debug=new Debug(6);
 /*
 CONSTRUCTORS
  */
@@ -87,7 +89,11 @@ METHODS
         //check if the user pressed the screen
         if (InputManager.movePoint != null)
         {
+            debug.output("Movement detected with movepoint.x at "+Float.toString(InputManager.movePoint.x));
+            debug.output("Movement detected with movepoint.y at "+Float.toString(InputManager.movePoint.y));
+
             //set the direction to where the user touched.
+            //setDirection((float) GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y - getViewCoords().y), (InputManager.movePoint.x - getViewCoords().x))));
             setDirection((float) GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y - getViewCoords().y), (InputManager.movePoint.x - getViewCoords().x))));
             //rotation and direction should be the same
             setRotation(direction);

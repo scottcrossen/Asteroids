@@ -37,7 +37,7 @@ CONSTRUCTORS
         database=new Database(context);
         ship=Ship.getInstance();
         ship.setScale((float) .25);
-        ship.enableRotationDrift();
+        //ship.enableRotationDrift();
         initializeNewLevel();
     }
 /*
@@ -47,7 +47,6 @@ METHODS
         if(current_level==null)
             current_level=database.dao.getLevel(1);
         else{
-            unloadLevelContent();
             current_level=database.dao.getLevel(current_level.getLevelNumber()+1);
         }
         if(current_level==null)
@@ -131,7 +130,7 @@ METHODS
                 DrawingHelper.drawCenteredText("You died. Push Back",(int)(100.0*(DrawingHelper.getGameViewWidth()/TEXT_SCALE)), Color.WHITE);
                 break;
             case TRANSITION:
-                DrawingHelper.drawCenteredText("Level " + Integer.toString(current_level.getLevel_number()) + " - " + current_level.getHint(), (int) (100.0 * (DrawingHelper.getGameViewWidth() / TEXT_SCALE)), Color.WHITE);
+                DrawingHelper.drawCenteredText("Level " + Integer.toString(current_level.getLevelnumber()) + " - " + current_level.getHint(), (int) (100.0 * (DrawingHelper.getGameViewWidth() / TEXT_SCALE)), Color.WHITE);
                 break;
             case PLAYING:
                 space.draw();

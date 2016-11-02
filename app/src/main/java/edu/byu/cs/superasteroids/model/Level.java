@@ -242,7 +242,7 @@ GETTERS/SETTERS
      * The getter for the level number.
      * @return  the level number
      */
-    public int getLevel_number() {
+    public int getLevelnumber() {
         return level_number;
     }
     /**

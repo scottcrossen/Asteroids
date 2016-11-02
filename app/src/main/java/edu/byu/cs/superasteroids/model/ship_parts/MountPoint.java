@@ -44,6 +44,39 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null)
+        {
+            return false;
+        }
+        else if (this == o)
+        {
+            return true;
+        }
+        else if (getClass() != o.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            MountPoint other = (MountPoint)o;
+
+            if (x != other.x)
+            {
+                return false;
+            }
+            else if (y != other.y)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
 /*
 CONSTANTS/FINALS
  */

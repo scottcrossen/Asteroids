@@ -3,6 +3,7 @@ package edu.byu.cs.superasteroids.model;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 
 /**
@@ -29,6 +30,7 @@ FIELDS
      */
     protected float direction;
     private ROTATION_DRIFT rot_drift = ROTATION_DRIFT.NONE;
+    Debug debug=new Debug(7);
 /*
 CONSTRUCTORS
  */
@@ -120,6 +122,7 @@ METHODS
     }
     public void setDirection(float _direction)
     {
+        debug.output("New direction set: "+Float.toString(_direction));
         if(_direction<0) direction=_direction-360*(_direction%360);
         else if(_direction>=360) direction=_direction+360*(_direction%360);
         else direction=_direction;

@@ -32,25 +32,30 @@ CONSTRUCTORS
      * @param image     how the projectile looks
      * @param direction_deg the intiial direction of the projectile
      */
-    Projectile(Image image, PointF map_coords, float direction_deg, float scale)
-    {
+    Projectile(Image image, PointF map_coords, float direction_deg, float scale) {
         super(image, map_coords, PROJECTILE_SPEED, direction_deg);
+        setRotation(direction_deg);
+        setScale(scale);
     }
 /*
 METHODS
  */
     /**
      * The update function is overridden for projectiles. They move slightly different.
-     */
-    public void update(){}
-    /**
-     * The update function is overridden for projectiles. They move slightly different.
      * @param elapsedTime   The elapsed time of the game.
      */
     @Override
-    public void update(double elapsedTime)
-    {
+    public void update(double elapsedTime){
         time_remaining -= elapsedTime;
+        super.update(elapsedTime);
+    }
+    public boolean needsDeletion() {
+        if (time_remaining <= 0) {
+            return true;
+        }
+        else {
+            return super.needsDeletion();
+        }
     }
 /*
 CONSTANTS/FINALS

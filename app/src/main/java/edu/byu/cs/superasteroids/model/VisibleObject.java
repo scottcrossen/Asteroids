@@ -1,5 +1,7 @@
 package edu.byu.cs.superasteroids.model;
 
+import edu.byu.cs.superasteroids.base.Debug;
+
 /**
  * Any object that can be seen on screen inherits properties from this or one of it's extended classes.
  * @author Scott Leland Crossen
@@ -20,6 +22,7 @@ FIELDS
      * The image of the visible object has a class "Image".
      */
     protected Image image;
+    Debug debug=new Debug(7);
 /*
 CONSTRUCTORS
  */
@@ -54,6 +57,7 @@ GETTERS/SETTERS
      * The setter for rotation
      */
     public void setRotation(float _rotation){
+        //debug.output("New rotation set: "+Float.toString(_rotation));
         if(_rotation<0) rotation=_rotation-360*(_rotation%360);
         else if(_rotation>=360) rotation=_rotation+360*(_rotation%360);
         else rotation=_rotation;
