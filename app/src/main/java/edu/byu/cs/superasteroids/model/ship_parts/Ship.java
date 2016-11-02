@@ -52,6 +52,10 @@ FIELDS
      * How long it takes to recharge it's bullets.
      */
     private static final double FIRE_RATE = .5; //the rate of fire between bullets (bullets per second)
+    /**
+     * The time it takes untill the ship can fire again.
+     */
+    private double time_until_fire = 0;
 /*
 CONSTRUCTORS
  */
@@ -77,6 +81,78 @@ METHODS
      */
     @Override
     public void update(double elapsedTime){
+        //don't fire constantly when the user presses finger. Keep track of the time between bullets
+        time_until_fire -= elapsedTime;
+
+        //check if the user pressed the screen
+        if (InputManager.movePoint != null)
+        {
+            //set the direction to where the user touched.
+            setDirection((float) GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y - getViewCoords().y), (InputManager.movePoint.x - getViewCoords().x))));
+            //rotation and direction should be the same
+            setRotation(direction);
+
+            //since the user is touching the screen, move the ship (speed > 0)
+            speed = engine.getBaseSpeed();
+
+            //since the user is touching the screen, fire some bullets.
+            //check if its time to fire.
+            if (time_until_fire <= 0)
+            {
+                //find emit point
+                PointF nozzle = new PointF(
+                        getScale()*(main_body.getCannonAttach().x - cannon.getMountPoint().x + cannon.getNozzle().x),
+                        getScale()*(main_body.getCannonAttach().y - cannon.getMountPoint().y + cannon.getNozzle().y));
+
+                //rotate the emit point
+                PointF rotated = GraphicsUtils.rotate(nozzle, getRotation());
+
+                //create a new rotated bullet
+                Projectile bullet = new Projectile(
+                        cannon.getAttackImage(),
+                        new PointF(rotated.x + getMapCoords().x, rotated.y + getMapCoords().y),
+                        //getMapCoords().x + main_body.getCannonAttach().adjustAngleScale(main_body, rotation_deg).x - cannon.getMountPoint().adjustAngleScale(cannon, rotation_deg).x + cannon.getNozzle().adjustAngleScale(cannon, rotation_deg).x,
+                        //getMapCoords().y + main_body.getCannonAttach().adjustAngleScale(main_body, rotation_deg).y - cannon.getMountPoint().adjustAngleScale(cannon, rotation_deg).y + cannon.getNozzle().adjustAngleScale(cannon, rotation_deg).y),
+                        getRotation(),
+                        getScale());
+
+                //play a sound
+                if (cannon.getAttackSoundID() != -1) {
+                    ContentManager.getInstance().playSound(cannon.getAttackSoundID(), (float) .5, (float) 1);
+                }
+
+                //tell the bullet where it is on the screen
+                bullet.setViewPort(view_port);
+
+                //keep track of the bullets.
+                bullets.add(bullet);
+
+                //reset the timer.
+                time_until_fire = FIRE_RATE;
+            }
+        }
+        else
+        {
+            //the user isn't touching, so don't move the ship.
+            speed = 0;
+        }
+
+        super.update(elapsedTime);
+
+        //iterate over all the bullets
+        Iterator<Projectile> bullet_index = bullets.iterator();
+
+        while (bullet_index.hasNext())
+        {
+            Projectile current_bullet = bullet_index.next();
+
+            //update all the bullets
+            current_bullet.update(elapsedTime);
+            if (current_bullet.needsDeletion())
+            {
+                bullet_index.remove();
+            }
+        }
     }
     @Override
     public void draw() {
@@ -119,10 +195,6 @@ METHODS
 /*
 CONSTANTS/FINALS
  */
-    /**
-     * The time it takes untill the ship can fire again.
-     */
-    private static final double time_until_fire = 0;
 /*
 GETTERS/SETTERS
  */
