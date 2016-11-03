@@ -13,7 +13,7 @@ import edu.byu.cs.superasteroids.model.Space;
 import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 
 /**
- * Created by slxn42 on 11/1/16.
+ * @author Scott Leland Crossen
  */
 public class GameDelegate implements IGameDelegate {
 /*

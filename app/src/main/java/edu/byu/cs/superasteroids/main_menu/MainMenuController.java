@@ -12,7 +12,7 @@ import edu.byu.cs.superasteroids.model.ship_parts.PowerCore;
 import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 
 /**
- * Created by Scott Leland Crossen
+ * @author Scott Leland Crossen
  */
 public class MainMenuController implements IMainMenuController {
 /*

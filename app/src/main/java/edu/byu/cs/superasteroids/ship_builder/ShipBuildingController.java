@@ -22,7 +22,7 @@ import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 import edu.byu.cs.superasteroids.model.ship_parts.ShipPart;
 
 /**
- * Created by Scott Leland Crossen
+ * @author Scott Leland Crossen
  */
 public class ShipBuildingController implements IShipBuildingController {
     /*

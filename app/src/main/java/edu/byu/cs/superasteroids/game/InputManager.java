@@ -4,6 +4,7 @@ import android.graphics.PointF;
 
 /**
  * A simple class with static values for keeping track of user input
+ * @author Scott Leland Crossen
  */
 public class InputManager {
 

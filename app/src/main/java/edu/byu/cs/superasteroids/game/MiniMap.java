@@ -1,9 +1,5 @@
 package edu.byu.cs.superasteroids.game;
 
-/**
- * Created by Scott Leland Crossen
- */
-
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -17,6 +13,7 @@ import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 
 /**
  * The minimap is a box in the top-left of the screen. It doesn't move, but needs to be updated to show where all the asteroids are.
+ * @author Scott Leland Crossen
  */
 public class MiniMap {
 /*
