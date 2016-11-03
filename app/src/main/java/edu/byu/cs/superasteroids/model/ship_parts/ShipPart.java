@@ -32,8 +32,7 @@ CONSTRUCTORS
      * @param _image        what the ship part looks like
      * @param _mount_point  where the ship part mounts to the main body
      */
-    public ShipPart(Image _image, MountPoint _mount_point)
-    {
+    public ShipPart(Image _image, MountPoint _mount_point) {
         image = _image;
         mount_point = _mount_point;
         debug=new Debug();
@@ -51,7 +50,7 @@ METHODS
         PointF pic_center = new PointF(
                 scale*(getBodyAttachPoint(main_body).x - getMountPoint().x),
                 scale*(getBodyAttachPoint(main_body).y - getMountPoint().y));
-        PointF rotated = GraphicsUtils.rotate(pic_center, rotation);
+        PointF rotated = GraphicsUtils.rotate(pic_center, GraphicsUtils.degreesToRadians(rotation)); // I could write the GraphicsUtils class so much more coherently
         DrawingHelper.drawImage(
                 image.getContentID(),
                 rotated.x + ship_location.x,

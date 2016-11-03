@@ -18,7 +18,7 @@ FIELDS
     /**
      * The drift-speed of the object's rotation.
      */
-    private static float ROTATION_DRIFT_SPEED=(float)20;
+    private static float ROTATION_DRIFT_SPEED=(float).0001;
     /**
      * The speed of the object
      */
@@ -54,7 +54,7 @@ METHODS
      * Redraw the object according to how much time has past.
      */
     public void update(double elapsedTime){
-        GraphicsUtils.MoveObjectResult new_pos = GraphicsUtils.moveObject(getMapCoords(), getBound(), speed, GraphicsUtils.degreesToRadians(direction - 90), elapsedTime);
+        GraphicsUtils.MoveObjectResult new_pos = GraphicsUtils.moveObject(getMapCoords(), getBound(), speed, GraphicsUtils.degreesToRadians(direction), elapsedTime);
         if (rot_drift == ROTATION_DRIFT.CLOCKW) {
             setRotation((float)(getRotation() + ROTATION_DRIFT_SPEED * elapsedTime));
         }
@@ -64,12 +64,10 @@ METHODS
         setMapCoords(new_pos.getNewObjPosition(), new_pos.getNewObjBounds());
     }
     public boolean needsDeletion() {
-        if (is_hit) {
+        if (is_hit)
             return true;
-        }
-        else {
+        else
             return false;
-        }
     }
     public void touch()
     {
@@ -81,20 +79,13 @@ METHODS
         float height = bound.height();
         setMapCoords(point, new RectF(point.x - width / 2, point.y - height / 2, point.x + width / 2, point.y + height / 2));
     }
-    public void resetBounds()
-    {
+    public void resetBounds() {
         float max_dim;
         if (image.getHeight() > image.getWidth())
-        {
             max_dim = image.getHeight();
-        }
         else
-        {
             max_dim = image.getWidth();
-        }
-
         max_dim = max_dim*getScale();
-
         bound = new RectF(
                 getMapCoords().x - max_dim / 2,
                 getMapCoords().y - max_dim / 2,
@@ -110,22 +101,16 @@ METHODS
         super.setScale(_scale);
         resetBounds();
     }
-
     public void enableRotationDrift() {
         double temp = Math.random();
-        if (temp < .5) {
+        if (temp < .5)
             rot_drift = ROTATION_DRIFT.CLOCKW;
-        }
-        else {
+        else
             rot_drift = ROTATION_DRIFT.COUNTERCLOCKW;
-        }
     }
-    public void setDirection(float _direction)
-    {
-        debug.output("New direction set: "+Float.toString(_direction));
-        if(_direction<0) direction=_direction-360*(_direction%360);
-        else if(_direction>=360) direction=_direction+360*(_direction%360);
-        else direction=_direction;
+    public void setDirection(float _direction) {
+        direction=(_direction%360);
+        if(direction<0) direction+=360;
     }
 /*
 CONSTANTS/FINALS
@@ -137,7 +122,7 @@ GETTERS/SETTERS
      * The getter for the rotation drift speed
      * @return  the rotation drift speed
      */
-    public float getRotation_drift_speed() {
+    public float getRotationDriftSpeed() {
         return ROTATION_DRIFT_SPEED;
     }
     /**

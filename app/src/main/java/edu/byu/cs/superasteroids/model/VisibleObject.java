@@ -56,11 +56,10 @@ GETTERS/SETTERS
     /**
      * The setter for rotation
      */
-    public void setRotation(float _rotation){
-        //debug.output("New rotation set: "+Float.toString(_rotation));
-        if(_rotation<0) rotation=_rotation-360*(_rotation%360);
-        else if(_rotation>=360) rotation=_rotation+360*(_rotation%360);
-        else rotation=_rotation;
+    public void setRotation(float _rotation) {
+        rotation = (_rotation % 360)+90;
+        if (rotation < 0) rotation += 360;
+        if (rotation > 360) rotation -= 360;
     }
     public void setScale(float _scale){scale=_scale;}
     /**

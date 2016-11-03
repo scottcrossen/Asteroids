@@ -28,12 +28,10 @@ CONSTRUCTORS
      */
     public PositionedObject(Image image, PointF _position) {
         super(image);
-        if (_position != null) {
+        if (_position != null)
             position = _position;
-        }
-        else {
+        else
             position = new PointF(0, 0);
-        }
     }
 /*
 METHODS
