@@ -27,8 +27,7 @@ CONSTRUCTORS
      * @param _cannon_boost how much the core boosts the cannon by
      * @param _engine_boost how much the core boosts the engine by
      */
-    public PowerCore(Image image, int _cannon_boost, int _engine_boost)
-    {
+    public PowerCore(Image image, int _cannon_boost, int _engine_boost) {
         super(image, null);
         cannon_boost = _cannon_boost;
         engine_boost = _engine_boost;
@@ -37,10 +36,7 @@ CONSTRUCTORS
 METHODS
  */
     @Override
-    public MountPoint getBodyAttachPoint(MainBody main_body)
-    {
-        return null;
-    }
+    public MountPoint getBodyAttachPoint(MainBody main_body) {return null;}
 /*
 CONSTANTS/FINALS
  */
@@ -51,28 +47,20 @@ GETTERS/SETTERS
      * The getter for the cannon boost amount.
      * @return  cannon boost
      */
-    public int getCannonBoost() {
-        return cannon_boost;
-    }
+    public int getCannonBoost() {return cannon_boost;}
     /**
      * The setter for the cannon boost amount.
      * @param cannon_boost  the cannon-boost amount.
      */
-    public void setCannonBoost(int cannon_boost) {
-        this.cannon_boost = cannon_boost;
-    }
+    public void setCannonBoost(int cannon_boost) {this.cannon_boost = cannon_boost;}
     /**
      * The getter for the engine boost amount.
      * @return  engine boost
      */
-    public int getEngineBoost() {
-        return engine_boost;
-    }
+    public int getEngineBoost() {return engine_boost;}
     /**
      * The setter of the engine boost amount.
      * @param engine_boost  engine boost
      */
-    public void setEngineBoost(int engine_boost) {
-        this.engine_boost = engine_boost;
-    }
+    public void setEngineBoost(int engine_boost) {this.engine_boost = engine_boost;}
 }

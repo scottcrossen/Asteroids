@@ -50,12 +50,10 @@ METHODS
         super.update(elapsedTime);
     }
     public boolean needsDeletion() {
-        if (time_remaining <= 0) {
+        if (time_remaining <= 0)
             return true;
-        }
-        else {
+        else
             return super.needsDeletion();
-        }
     }
 /*
 CONSTANTS/FINALS
@@ -67,14 +65,10 @@ GETTERS/SETTERS
      * The getter of the projectile Speed
      * @return  the projectile speed
      */
-    public static int getProjectileSpeed() {
-        return PROJECTILE_SPEED;
-    }
+    public static int getProjectileSpeed() {return PROJECTILE_SPEED;}
     /**
      * The getter of the time remaining value
      * @return  the time remaining
      */
-    public double getTime_remaining() {
-        return time_remaining;
-    }
+    public double getTime_remaining() {return time_remaining;}
 }

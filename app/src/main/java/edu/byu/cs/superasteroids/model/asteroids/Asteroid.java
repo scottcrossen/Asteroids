@@ -19,9 +19,7 @@ public abstract class Asteroid extends MovingObject {
 /*
 FIELDS
  */
-
     private float level_width;
-
     private float level_height;
 /*
 CONSTRUCTORS
@@ -31,7 +29,7 @@ CONSTRUCTORS
      * @param image     the image of the asteroid.
      */
     public Asteroid(Image image) {
-        super(image, new PointF(0, 0), -1, -1); //the start values are not important until the init function is ran
+        super(image, new PointF(0, 0), -1, -1); // The start values are not important until the init function is ran
         setScale(1);
         //enableRotationDrift();
     }
@@ -40,43 +38,43 @@ METHODS
  */
     @Override
     public void update(double elapsedTime) {
-        GraphicsUtils.RicochetObjectResult result = GraphicsUtils.ricochetObject(getMapCoords(), getBound(), GraphicsUtils.degreesToRadians(direction), level_width, level_height);
+        // Move Object if hit border.
+        GraphicsUtils.RicochetObjectResult result = GraphicsUtils.ricochetObject(getMapCoords(), getBound(),
+                GraphicsUtils.degreesToRadians(direction), level_width, level_height);
         setMapCoords(result.getNewObjPosition(), result.getNewObjBounds());
-        direction = (float)GraphicsUtils.radiansToDegrees(result.getNewAngleRadians());
+        direction = (float)GraphicsUtils.radiansToDegrees(result.getNewAngleRadians());// Set new direction from richochet
         super.update(elapsedTime);
         checkCollisions(Ship.getInstance());
     }
-    public int addUponDeletion()
-    {
-        return 2;
+    public int addUponDeletion() {
+        return DELETION_CHILDREN_SIZE;
     }
     public void checkCollisions(Ship ship) {
         if (getBound().intersect(ship.getBound())) {
             ship.touch();
-            touch();
+            touch(); // Destroy both.
         }
         Iterator<Projectile> bullet_index = ship.getProjectiles().iterator();
-        while(bullet_index.hasNext()) {
+        while(bullet_index.hasNext()) { // Check all bullets for collisions with asteroids
             Projectile current_bullet = bullet_index.next();
-            if (getBound().intersect(current_bullet.getBound()))
-            {
+            if (getBound().intersect(current_bullet.getBound())) {
                 current_bullet.touch();
                 touch();
             }
         }
     }
-    public void init(float level_width, float level_height) {
+    public void init(float level_width, float level_height) { // Initialize movement and object
         setMapCoords(new PointF((float)Math.random() * level_width, (float)Math.random() * level_width));
         initVector(level_width, level_height);
     }
-    public void initVector(float level_width, float level_height) {
+    public void initVector(float level_width, float level_height) { // Initialize movement
         this.level_width = level_width;
         this.level_height = level_height;
         speed = (int)((Math.random() * (MAX_SPEED - MIN_SPEED)) + MIN_SPEED);
         direction = (int)(Math.random() * 360);
     }
     public boolean isGrowing() {
-        return false;
+        return false; // Growing will override this.
     }
 /*
 CONSTANTS/FINALS
@@ -84,6 +82,7 @@ CONSTANTS/FINALS
     private static final int MAX_SPEED = 400;
     private static final int MIN_SPEED = 200;
     private static final double SCALE_INCREMENT = 1.1;
+    private static final int DELETION_CHILDREN_SIZE=2;
 /*
 GETTERS/SETTERS
  */

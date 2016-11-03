@@ -54,26 +54,13 @@ GETTERS/SETTERS
      * The getter for position
      * @return  the current position of the object
      */
-    public PointF getPosition() {
-        return position;
-    }
+    public PointF getPosition() {return position;}
     /**
      * The setter for the position
      */
-    public void setPosition(PointF _position){
-        position=_position;
-    }
-    public void setViewPort(ViewPort viewPort) {
-        view_port = viewPort;
-    }
-    public PointF getViewCoords() {
-        return view_port.convertToViewPort(position);
-    }
-
-    public PointF getMapCoords() {
-        return position;
-    }
-    public void setMapCoords(PointF point) {
-        position = point;
-    }
+    public void setPosition(PointF _position){position=_position;}
+    public void setViewPort(ViewPort viewPort) {view_port = viewPort;}
+    public PointF getViewCoords() {return view_port.convertToViewPort(position);}
+    public PointF getMapCoords() {return position;}
+    public void setMapCoords(PointF point) {position = point;}
 }

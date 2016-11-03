@@ -47,18 +47,9 @@ METHODS
      * @param scale         the scale of the image
      */
     public void draw(PointF ship_location, MainBody main_body, float rotation, float scale) {
-        PointF pic_center = new PointF(
-                scale*(getBodyAttachPoint(main_body).x - getMountPoint().x),
-                scale*(getBodyAttachPoint(main_body).y - getMountPoint().y));
+        PointF pic_center = new PointF(scale*(getBodyAttachPoint(main_body).x - getMountPoint().x), scale*(getBodyAttachPoint(main_body).y - getMountPoint().y));
         PointF rotated = GraphicsUtils.rotate(pic_center, GraphicsUtils.degreesToRadians(rotation)); // I could write the GraphicsUtils class so much more coherently
-        DrawingHelper.drawImage(
-                image.getContentID(),
-                rotated.x + ship_location.x,
-                rotated.y + ship_location.y,
-                rotation,
-                scale,
-                scale,
-                255);
+        DrawingHelper.drawImage(image.getContentID(), rotated.x + ship_location.x, rotated.y + ship_location.y, rotation, scale, scale, 255);
     }
     //This method is mainly used for polymorphism and connecting parts to ship
     abstract public MountPoint getBodyAttachPoint(MainBody main_body);
@@ -72,17 +63,11 @@ GETTERS/SETTERS
      * The getter of the part image
      * @return  the image
      */
-    public Image getImage() {
-        return image;
-    }
+    public Image getImage() {return image;}
     /**
      * The getter of the mount-point
      * @return  the mount-point
      */
-    public MountPoint getMountPoint() {
-        return mount_point;
-    }
-    public void setMountPoint(MountPoint mount_point) {
-        this.mount_point = mount_point;
-    }
+    public MountPoint getMountPoint() {return mount_point;}
+    public void setMountPoint(MountPoint mount_point) {this.mount_point = mount_point;}
 }

@@ -35,35 +35,20 @@ CONSTRUCTORS
         image_width = _image_width;
         image_height = _image_height;
     }
-    /*
-    METHODS
-     */
+/*
+METHODS
+ */
     @Override
-    public boolean equals(Object other) {
-        if (other == null) {
+    public boolean equals(Object other) { // This was modified from the generated default method
+        if (other == null)
             return false;
-        }
-        else if (this == other) {
+        else if (this == other)
             return true;
-        }
-        else if (getClass() != other.getClass()) {
+        else if (getClass() != other.getClass())
             return false;
-        }
         else {
             Image other_image = (Image)other;
-
-            if (!(getPath().equals(other_image.getPath()))) {
-                return false;
-            }
-            else if (getWidth() != other_image.getWidth()) {
-                return false;
-            }
-            else if (getHeight() != other_image.getHeight()) {
-                return false;
-            }
-            else {
-                return true;
-            }
+            return (!(!(getPath().equals(other_image.getPath())) || getWidth() != other_image.getWidth() || getHeight() != other_image.getHeight())) ;
         }
     }
 /*
@@ -72,38 +57,24 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
-    public int getContentID()
-{
-    return content_id;
-}
-    public void setContentID(int id)
-    {
-        content_id = id;
-    }
+    public int getContentID(){return content_id;}
+    public void setContentID(int id) {content_id = id;}
     /**
      * The getter for the image path
      * @return  the image path
      */
     public String getPath() {return path;}
-    public void setPath(String path) {
-        this.path = path;
-    }
+    public void setPath(String path) {this.path = path;}
     /**
      * The getter of the image width
      * @return  the image width
      */
     public int getWidth() {return image_width;}
-    public void setWidth(int image_width) {
-        this.image_width = image_width;
-    }
+    public void setWidth(int image_width) {this.image_width = image_width;}
     /**
      * The getter of the image height
      * @return  the image height
      */
-    public int getHeight() {
-        return image_height;
-    }
-    public void setHeight(int image_height) {
-        this.image_height = image_height;
-    }
+    public int getHeight() {return image_height;}
+    public void setHeight(int image_height) {this.image_height = image_height;}
 }

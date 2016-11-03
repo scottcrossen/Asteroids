@@ -50,14 +50,12 @@ GETTERS/SETTERS
      * The getter for rotation
      * @return  the current rotation
      */
-    public float getRotation() {
-        return rotation;
-    }
+    public float getRotation() {return rotation;}
     /**
      * The setter for rotation
      */
     public void setRotation(float _rotation) {
-        rotation = (_rotation % 360)+90;
+        rotation = (_rotation % 360)+90; // The zero for rotation is different than direction.
         if (rotation < 0) rotation += 360;
         if (rotation > 360) rotation -= 360;
     }
@@ -71,8 +69,6 @@ GETTERS/SETTERS
      * the getter for the image
      * @return  the image.
      */
-    public Image getImage() {
-        return image;
-    }
+    public Image getImage() {return image;}
     public void setImage(Image _image){image=_image;}
 }

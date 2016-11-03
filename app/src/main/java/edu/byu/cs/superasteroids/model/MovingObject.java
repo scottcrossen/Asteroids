@@ -23,12 +23,12 @@ FIELDS
      * The speed of the object
      */
     protected int speed;
-    private boolean is_hit=false;
-    protected RectF bound;
     /**
      * The direction the object is moving
      */
     protected float direction;
+    private boolean is_hit=false;
+    protected RectF bound;
     private ROTATION_DRIFT rot_drift = ROTATION_DRIFT.NONE;
     Debug debug=new Debug(7);
 /*
@@ -55,22 +55,16 @@ METHODS
      */
     public void update(double elapsedTime){
         GraphicsUtils.MoveObjectResult new_pos = GraphicsUtils.moveObject(getMapCoords(), getBound(), speed, GraphicsUtils.degreesToRadians(direction), elapsedTime);
-        if (rot_drift == ROTATION_DRIFT.CLOCKW) {
+        if (rot_drift == ROTATION_DRIFT.CLOCKW) // Add on rotation drift amount since last time.
             setRotation((float)(getRotation() + ROTATION_DRIFT_SPEED * elapsedTime));
-        }
-        else if (rot_drift == ROTATION_DRIFT.COUNTERCLOCKW) {
+        else if (rot_drift == ROTATION_DRIFT.COUNTERCLOCKW)
             setRotation((float)(getRotation() - ROTATION_DRIFT_SPEED * elapsedTime));
-        }
         setMapCoords(new_pos.getNewObjPosition(), new_pos.getNewObjBounds());
     }
     public boolean needsDeletion() {
-        if (is_hit)
-            return true;
-        else
-            return false;
+        return is_hit;
     }
-    public void touch()
-    {
+    public void touch() {
         is_hit = true;
     }
     @Override
@@ -81,17 +75,19 @@ METHODS
     }
     public void resetBounds() {
         float max_dim;
-        if (image.getHeight() > image.getWidth())
+        if (image.getHeight() > image.getWidth()) // Get the max between the two.
             max_dim = image.getHeight();
         else
             max_dim = image.getWidth();
         max_dim = max_dim*getScale();
-        bound = new RectF(
-                getMapCoords().x - max_dim / 2,
-                getMapCoords().y - max_dim / 2,
-                getMapCoords().x + max_dim / 2,
-                getMapCoords().y + max_dim / 2);
+        bound = new RectF(getMapCoords().x - max_dim / 2, getMapCoords().y - max_dim / 2, getMapCoords().x + max_dim / 2, getMapCoords().y + max_dim / 2);
     }
+
+    /**
+     * Sets the current position.
+     * @param point     desired position
+     * @param _bound    the bounding rectangle.
+     */
     public void setMapCoords(PointF point, RectF _bound) {
         super.setMapCoords(point);
         bound = _bound;
@@ -102,15 +98,14 @@ METHODS
         resetBounds();
     }
     public void enableRotationDrift() {
-        double temp = Math.random();
-        if (temp < .5)
+        if (Math.random() < .5) // 50% chance of cw or ccw rotation
             rot_drift = ROTATION_DRIFT.CLOCKW;
         else
             rot_drift = ROTATION_DRIFT.COUNTERCLOCKW;
     }
     public void setDirection(float _direction) {
-        direction=(_direction%360);
-        if(direction<0) direction+=360;
+        direction=(_direction%360); // Only allow directions in the range. Scale appropriately.
+        if(direction<0) direction+=360; // In case the value is negative.
     }
 /*
 CONSTANTS/FINALS
@@ -122,22 +117,15 @@ GETTERS/SETTERS
      * The getter for the rotation drift speed
      * @return  the rotation drift speed
      */
-    public float getRotationDriftSpeed() {
-        return ROTATION_DRIFT_SPEED;
-    }
+    public float getRotationDriftSpeed() {return ROTATION_DRIFT_SPEED;}
     /**
      * The getter for the translational speed
      * @return  the translational speed
      */
-    public int getSpeed() {
-        return speed;
-    }
+    public int getSpeed() {return speed;}
     /**
      * The setter for the speed
      */
     public void setSpeed(int _speed){speed=_speed;}
-    public RectF getBound()
-    {
-        return bound;
-    }
+    public RectF getBound() {return bound;}
 }

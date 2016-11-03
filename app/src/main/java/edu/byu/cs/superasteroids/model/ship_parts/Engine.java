@@ -37,8 +37,7 @@ CONSTRUCTORS
 METHODS
  */
     @Override
-    public MountPoint getBodyAttachPoint(MainBody main_body)
-{
+    public MountPoint getBodyAttachPoint(MainBody main_body) {
     return main_body.getEngineAttach();
 }
 /*
@@ -51,28 +50,20 @@ GETTERS/SETTERS
      * The getter for the translational speed.
      * @return  the translational speed.
      */
-    public int getBaseSpeed() {
-        return base_speed;
-    }
+    public int getBaseSpeed() {return base_speed;}
     /**
      * The setter for the translational speed
      * @param base_speed    the translational speed.
      */
-    public void setBaseSpeed(int base_speed) {
-        this.base_speed = base_speed;
-    }
+    public void setBaseSpeed(int base_speed) {this.base_speed = base_speed;}
     /**
      * The getter for the rotational speed.
      * @return  the translational speed.
      */
-    public int getBaseTurnRate() {
-        return base_turn_rate;
-    }
+    public int getBaseTurnRate() {return base_turn_rate;}
     /**
      * The getter for the rotational speed.
      * @param base_turn_rate    the translational speed.
      */
-    public void setBaseTurnRate(int base_turn_rate) {
-        this.base_turn_rate = base_turn_rate;
-    }
+    public void setBaseTurnRate(int base_turn_rate) {this.base_turn_rate = base_turn_rate;}
 }

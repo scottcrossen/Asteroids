@@ -83,72 +83,61 @@ METHODS
      */
     @Override
     public void update(double elapsedTime){
-        //don't fire constantly when the user presses finger. Keep track of the time between bullets
+        // Don't fire constantly when the user presses finger. Make a time limit.
         time_until_fire -= elapsedTime;
-        //check if the user pressed the screen
-        if (InputManager.movePoint != null) {
-            //set the direction to where the user touched.
+        // Check if the user is pressing down.
+        if (InputManager.movePoint != null) { // User is touching screen
+            // Set the direction to where the user touched.
             setDirection((float) (GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y-getViewCoords().y),(InputManager.movePoint.x-getViewCoords().x)))));
-            //rotation and direction should be the same
+            // For this case, rotation and direction should be the same
             setRotation(direction);
-            //since the user is touching the screen, move the ship (speed > 0)
+            // Move the ship towards direction
             speed = engine.getBaseSpeed();
-            //since the user is touching the screen, fire some bullets.
-            //check if its time to fire.
+            // Fire some bullets if allowed
             if (time_until_fire <= 0) {
-                //find emit point
-                PointF nozzle = new PointF(
-                        getScale()*(main_body.getCannonAttach().x - cannon.getMountPoint().x + cannon.getNozzle().x),
+                // Find emitter point
+                PointF nozzle = new PointF(getScale()*(main_body.getCannonAttach().x - cannon.getMountPoint().x + cannon.getNozzle().x),
                         getScale()*(main_body.getCannonAttach().y - cannon.getMountPoint().y + cannon.getNozzle().y));
-                //rotate the emit point
+                // Rotate the emit point
                 PointF rotated = GraphicsUtils.rotate(nozzle, GraphicsUtils.degreesToRadians(getRotation()));
-                //create a new rotated bullet
-                Projectile bullet = new Projectile(
-                        cannon.getAttackImage(),
-                        new PointF(rotated.x + getMapCoords().x, rotated.y + getMapCoords().y),
-                        //getMapCoords().x + main_body.getCannonAttach().adjustAngleScale(main_body, rotation_deg).x - cannon.getMountPoint().adjustAngleScale(cannon, rotation_deg).x + cannon.getNozzle().adjustAngleScale(cannon, rotation_deg).x,
-                        //getMapCoords().y + main_body.getCannonAttach().adjustAngleScale(main_body, rotation_deg).y - cannon.getMountPoint().adjustAngleScale(cannon, rotation_deg).y + cannon.getNozzle().adjustAngleScale(cannon, rotation_deg).y),
-                        getRotation()-90,
-                        getScale());
-                //play a sound
-                if (cannon.getAttackSoundID() != -1) {
+                // Create a new rotated bullet
+                Projectile bullet = new Projectile(cannon.getAttackImage(),
+                        new PointF(rotated.x + getMapCoords().x, rotated.y + getMapCoords().y), getRotation()-90, getScale());
+                // Play the sound
+                if (cannon.getAttackSoundID() != -1)
                     ContentManager.getInstance().playSound(cannon.getAttackSoundID(), (float) .5, (float) 1);
-                }
-                //tell the bullet where it is on the screen
+                // Tell the bullet where it is on the screen
                 bullet.setViewPort(view_port);
-                //keep track of the bullets.
+                // Keep track of the bullets so we can delete them.
                 bullets.add(bullet);
-                //reset the timer.
+                // Reset the bullet timer.
                 time_until_fire = FIRE_RATE;
             }
         }
-        else {
-            //the user isn't touching, so don't move the ship.
+        else // The user isn't touching, so don't move the ship.
             speed = 0;
-        }
         super.update(elapsedTime);
-        //iterate over all the bullets
+        // Iterate over all the bullets and update.
         Iterator<Projectile> bullet_index = bullets.iterator();
         while (bullet_index.hasNext()) {
             Projectile current_bullet = bullet_index.next();
-            //update all the bullets
-            current_bullet.update(elapsedTime);
+            current_bullet.update(elapsedTime); // Update all the bullets
             if (current_bullet.needsDeletion())
                 bullet_index.remove();
         }
     }
     @Override
-    public void draw() {
+    public void draw() { // This draw function is used when no position is given.
         draw(getViewCoords());
         Iterator<Projectile> bullet_index = bullets.iterator();
         while (bullet_index.hasNext()) {
             bullet_index.next().draw();
         }
     }
-    private void draw(PointF position){
+    private void draw(PointF position){ // This draw function is used when a position is given.
         draw(position,getScale());
     }
-    public void draw(PointF position, float scale){
+    public void draw(PointF position, float scale){ // Initial draw.
         if (main_body != null) {
             main_body.draw(position, main_body, getRotation(), scale);
             if (extrapart != null)
@@ -159,7 +148,7 @@ METHODS
                 engine.draw(position, main_body, getRotation(), scale);
         }
     }
-    public boolean isComplete() {
+    public boolean isComplete() { // For ShipBuilder activity check on if game can start.
         if (main_body != null &&
                 extrapart != null &&
                 cannon != null &&
@@ -175,10 +164,7 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
-    public List<Projectile> getProjectiles()
-{
-    return bullets;
-}
+    public List<Projectile> getProjectiles() {return bullets;}
     /**
      * The getter for the main-body
      * @return  the main-body
@@ -208,56 +194,40 @@ GETTERS/SETTERS
      * The settter of the extra-part
      * @param extrapart the extra-part
      */
-    public void setExtraPart(ExtraPart extrapart) {
-        this.extrapart = extrapart;
-    }
+    public void setExtraPart(ExtraPart extrapart) {this.extrapart = extrapart;}
     /**
      * The getter of the engine
      * @return  the engine
      */
-    public Engine getEngine() {
-        return engine;
-    }
+    public Engine getEngine() {return engine;}
     /**
      * The setter of the engine
      * @param engine    the engine
      */
-    public void setEngine(Engine engine) {
-        this.engine = engine;
-    }
+    public void setEngine(Engine engine) {this.engine = engine;}
     /**
      * The getter of the power-core
      * @return  the power-core
      */
-    public PowerCore getPowerCore() {
-        return powercore;
-    }
+    public PowerCore getPowerCore() {return powercore;}
     /**
      * The setter of the power-core
      * @param powercore the power-core.
      */
-    public void setPowerCore(PowerCore powercore) {
-        this.powercore = powercore;
-    }
+    public void setPowerCore(PowerCore powercore) {this.powercore = powercore;}
     /**
      * The getter for the bullet-list
      * @return  the bullet-list
      */
-    public static List<Projectile> getBullets() {
-        return bullets;
-    }
+    public static List<Projectile> getBullets() {return bullets;}
     /**
      * The getter of the only-allowed instance of the ship.
      * @return  the current ship
      */
-    public static Ship getInstance() {
-        return ourInstance;
-    }
+    public static Ship getInstance() {return ourInstance;}
     /**
      * The getter for the fire-rate
      * @return  the fire-rate.
      */
-    public static double getFireRate() {
-        return FIRE_RATE;
-    }
+    public static double getFireRate() {return FIRE_RATE;}
 }

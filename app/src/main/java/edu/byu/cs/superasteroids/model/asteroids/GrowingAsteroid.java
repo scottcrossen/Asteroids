@@ -22,8 +22,7 @@ CONSTRUCTORS
     public GrowingAsteroid(Image image) {
         super(image);
     }
-    public GrowingAsteroid(Image image, PointF _map_coords)
-    {
+    public GrowingAsteroid(Image image, PointF _map_coords) {
         super(image);
         setScale((float) .5);
         setMapCoords(_map_coords);
@@ -38,17 +37,13 @@ METHODS
     }
     @Override
     public int addUponDeletion() {
-        if (getScale() > 1) {
+        if (getScale() > 1)
             return (int) (getScale() * super.addUponDeletion());
-        }
         else
-        {
             return 0;
-        }
     }
     @Override
-    public boolean isGrowing()
-    {
+    public boolean isGrowing() {
         return true;
     }
 /*

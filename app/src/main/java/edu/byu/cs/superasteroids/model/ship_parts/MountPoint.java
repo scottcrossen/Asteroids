@@ -26,8 +26,7 @@ CONSTRUCTORS
      * @param _x    the relative location of the ship part on the main body
      * @param _y    the relative location of the ship part on the main body
      */
-    public MountPoint(int _x, int _y, Image image)
-    {
+    public MountPoint(int _x, int _y, Image image) {
         x = _x - image.getWidth()/2;
         y = _y - image.getHeight()/2;
     }
@@ -36,8 +35,7 @@ CONSTRUCTORS
      * @param _x    the relative location of the ship part on the main body
      * @param _y    the relative location of the ship part on the main body
      */
-    private MountPoint(int _x, int _y)
-    {
+    private MountPoint(int _x, int _y) {
         x = _x;
         y = _y;
     }
@@ -45,36 +43,16 @@ CONSTRUCTORS
 METHODS
  */
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (o == null)
-        {
             return false;
-        }
         else if (this == o)
-        {
             return true;
-        }
         else if (getClass() != o.getClass())
-        {
             return false;
-        }
-        else
-        {
+        else {
             MountPoint other = (MountPoint)o;
-
-            if (x != other.x)
-            {
-                return false;
-            }
-            else if (y != other.y)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return (!(x != other.x||y != other.y));
         }
     }
 /*
@@ -87,14 +65,10 @@ GETTERS/SETTERS
      * The getter for the x-attachment point
      * @return  the attachment x coordinate
      */
-    public int getX() {
-        return x;
-    }
+    public int getX() {return x;}
     /**
      * The getter for the y-attachment point
      * @return  the attachment y coordinate
      */
-    public int getY() {
-        return y;
-    }
+    public int getY() {return y;}
 }

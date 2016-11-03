@@ -56,21 +56,15 @@ GETTERS/SETTERS
      * The getter of the cannon attachment point.
      * @return the cannon attachment point.
      */
-    public MountPoint getCannonAttach() {
-        return cannon_attach;
-    }
+    public MountPoint getCannonAttach() {return cannon_attach;}
     /**
      * The getter of the engine attachment point.
      * @return the engine attachment point.
      */
-    public MountPoint getEngineAttach() {
-        return engine_attach;
-    }
+    public MountPoint getEngineAttach() {return engine_attach;}
     /**
      * The getter of the extra-part attachment point.
      * @return the extra-part attachment point.
      */
-    public MountPoint getExtraAttach() {
-        return extra_attach;
-    }
+    public MountPoint getExtraAttach() {return extra_attach;}
 }

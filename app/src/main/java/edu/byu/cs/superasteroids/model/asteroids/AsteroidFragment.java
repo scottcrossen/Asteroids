@@ -29,13 +29,13 @@ CONSTRUCTORS
 METHODS
  */
     @Override
-    public int addUponDeletion()
-    {
-        return 0;
+    public int addUponDeletion() {
+        return DELETION_CHILDREN_SIZE;
     }
 /*
 CONSTANTS/FINALS
  */
+    private static final int DELETION_CHILDREN_SIZE=0;
 /*
 GETTERS/SETTERS
  */

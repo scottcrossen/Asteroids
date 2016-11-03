@@ -38,8 +38,8 @@ METHODS
      */
     @Override
     public void draw() {
-        //PointF view_coords = view_port.convertToView(getMapCoords());
-        //DrawingHelper.drawImage(getImage().getContentID(), view_coords.x, view_coords.y, (float) 0, scale_x, scale_y, 255);
+        PointF view_coords = view_port.convertToViewPort(getMapCoords());
+        DrawingHelper.drawImage(getImage().getContentID(), view_coords.x, view_coords.y, (float) 0, scale_x, scale_y, 255);
     }
 /*
 CONSTANTS/FINALS

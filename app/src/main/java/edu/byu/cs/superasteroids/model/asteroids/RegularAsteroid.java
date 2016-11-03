@@ -19,8 +19,7 @@ CONSTRUCTORS
      * The constructor for this type of asteroid
      * @param image     the image of the asteroid.
      */
-    public RegularAsteroid(Image image)
-    {
+    public RegularAsteroid(Image image) {
         super(image);
     }
 /*
