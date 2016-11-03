@@ -39,7 +39,13 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    /**
+     * The getter of the object scale
+     */
     public float getScale() {return scale;}
+    /**
+     * The getter of the object id.
+     */
     public int getID() {
         return id;
     }

@@ -20,7 +20,7 @@ FIELDS
     /**
      * Whether the class is turned on
      */
-    private static final boolean turned_on=true;
+    private static final boolean turned_on=false;
     /**
      * The ID of the object
      */

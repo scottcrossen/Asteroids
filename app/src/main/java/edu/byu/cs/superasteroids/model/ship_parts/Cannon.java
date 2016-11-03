@@ -50,6 +50,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * The getter for the mount point where this part attaches.
+     * @param main_body the main body it attaches to
+     * @return the created mount point
+     */
     @Override
     public MountPoint getBodyAttachPoint(MainBody main_body) {
         return main_body.getCannonAttach();
@@ -85,8 +90,13 @@ GETTERS/SETTERS
      * @return  the damage value.
      */
     public int getAttackSoundID() {return attack_sound_content_id;}
-
+    /**
+     * The getter for the attack sound ID
+     */
     public void setAttackSoundID(int _id) {attack_sound_content_id = _id;}
+    /**
+     * The getter for the damage
+     */
     public int getDamage() {return damage;}
     /**
      * The setter for the damage the cannon does.

@@ -4,7 +4,6 @@ import android.graphics.PointF;
 
 import java.util.Iterator;
 
-import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.core.GraphicsUtils;
 import edu.byu.cs.superasteroids.model.Image;
 import edu.byu.cs.superasteroids.model.MovingObject;
@@ -36,19 +35,30 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * The update method for this class described in the parent class.
+     * @param elapsedTime
+     */
     @Override
     public void update(double elapsedTime) {
         // Move Object if hit border.
-        GraphicsUtils.RicochetObjectResult result = GraphicsUtils.ricochetObject(getMapCoords(), getBound(),
+        GraphicsUtils.RicochetObjectResult result = GraphicsUtils.ricochetObject(getPosition(), getBound(),
                 GraphicsUtils.degreesToRadians(direction), level_width, level_height);
         setMapCoords(result.getNewObjPosition(), result.getNewObjBounds());
         direction = (float)GraphicsUtils.radiansToDegrees(result.getNewAngleRadians());// Set new direction from richochet
         super.update(elapsedTime);
         checkCollisions(Ship.getInstance());
     }
+    /**
+     * Returns how many asteroids to create when this one dies.
+     */
     public int addUponDeletion() {
         return DELETION_CHILDREN_SIZE;
     }
+    /**
+     * Checks bounding box for collision
+     * @param ship
+     */
     public void checkCollisions(Ship ship) {
         if (getBound().intersect(ship.getBound())) {
             ship.touch();
@@ -63,16 +73,25 @@ METHODS
             }
         }
     }
+    /**
+     * Initializes Asteroid
+     */
     public void init(float level_width, float level_height) { // Initialize movement and object
-        setMapCoords(new PointF((float)Math.random() * level_width, (float)Math.random() * level_width));
+        setPosition(new PointF((float) Math.random() * level_width, (float) Math.random() * level_width));
         initVector(level_width, level_height);
     }
+    /**
+     * Initializes direction
+     */
     public void initVector(float level_width, float level_height) { // Initialize movement
         this.level_width = level_width;
         this.level_height = level_height;
         speed = (int)((Math.random() * (MAX_SPEED - MIN_SPEED)) + MIN_SPEED);
         direction = (int)(Math.random() * 360);
     }
+    /**
+     * Some Asteroids grow!
+     */
     public boolean isGrowing() {
         return false; // Growing will override this.
     }

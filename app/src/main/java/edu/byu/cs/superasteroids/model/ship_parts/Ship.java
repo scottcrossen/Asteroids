@@ -88,7 +88,7 @@ METHODS
         // Check if the user is pressing down.
         if (InputManager.movePoint != null) { // User is touching screen
             // Set the direction to where the user touched.
-            setDirection((float) (GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y-getViewCoords().y),(InputManager.movePoint.x-getViewCoords().x)))));
+            setDirection((float) (GraphicsUtils.radiansToDegrees(Math.atan2((InputManager.movePoint.y- getViewPortCoords().y),(InputManager.movePoint.x- getViewPortCoords().x)))));
             // For this case, rotation and direction should be the same
             setRotation(direction);
             // Move the ship towards direction
@@ -102,7 +102,7 @@ METHODS
                 PointF rotated = GraphicsUtils.rotate(nozzle, GraphicsUtils.degreesToRadians(getRotation()));
                 // Create a new rotated bullet
                 Projectile bullet = new Projectile(cannon.getAttackImage(),
-                        new PointF(rotated.x + getMapCoords().x, rotated.y + getMapCoords().y), getRotation()-90, getScale());
+                        new PointF(rotated.x + getPosition().x, rotated.y + getPosition().y), getRotation()-90, getScale());
                 // Play the sound
                 if (cannon.getAttackSoundID() != -1)
                     ContentManager.getInstance().playSound(cannon.getAttackSoundID(), (float) .5, (float) 1);
@@ -126,17 +126,26 @@ METHODS
                 bullet_index.remove();
         }
     }
+    /**
+     * Default draw funciton
+     */
     @Override
     public void draw() { // This draw function is used when no position is given.
-        draw(getViewCoords());
+        draw(getViewPortCoords());
         Iterator<Projectile> bullet_index = bullets.iterator();
         while (bullet_index.hasNext()) {
             bullet_index.next().draw();
         }
     }
+    /**
+     * Draw function given position
+     */
     private void draw(PointF position){ // This draw function is used when a position is given.
         draw(position,getScale());
     }
+    /**
+     * Draw function give position and scale
+     */
     public void draw(PointF position, float scale){ // Initial draw.
         if (main_body != null) {
             main_body.draw(position, main_body, getRotation(), scale);
@@ -148,6 +157,10 @@ METHODS
                 engine.draw(position, main_body, getRotation(), scale);
         }
     }
+    /**
+     * Tells the ShipBuilder activity if the ship is complete
+     * @return  whether the ship is complete.
+     */
     public boolean isComplete() { // For ShipBuilder activity check on if game can start.
         if (main_body != null &&
                 extrapart != null &&

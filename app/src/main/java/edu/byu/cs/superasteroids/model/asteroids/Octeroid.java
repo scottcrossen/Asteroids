@@ -25,6 +25,9 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * The amount of asteroids to create out of this one when it gets shot.
+     */
     @Override
     public int addUponDeletion() {
         return DELETION_CHILDREN_SIZE;

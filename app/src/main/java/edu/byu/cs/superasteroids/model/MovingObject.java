@@ -18,7 +18,7 @@ FIELDS
     /**
      * The drift-speed of the object's rotation.
      */
-    private static float ROTATION_DRIFT_SPEED=(float).0001;
+    private static float ROTATION_DRIFT_SPEED=(float)20;
     /**
      * The speed of the object
      */
@@ -54,25 +54,38 @@ METHODS
      * Redraw the object according to how much time has past.
      */
     public void update(double elapsedTime){
-        GraphicsUtils.MoveObjectResult new_pos = GraphicsUtils.moveObject(getMapCoords(), getBound(), speed, GraphicsUtils.degreesToRadians(direction), elapsedTime);
+        GraphicsUtils.MoveObjectResult new_pos = GraphicsUtils.moveObject(getPosition(), getBound(), speed, GraphicsUtils.degreesToRadians(direction), elapsedTime);
         if (rot_drift == ROTATION_DRIFT.CLOCKW) // Add on rotation drift amount since last time.
             setRotation((float)(getRotation() + ROTATION_DRIFT_SPEED * elapsedTime));
         else if (rot_drift == ROTATION_DRIFT.COUNTERCLOCKW)
             setRotation((float)(getRotation() - ROTATION_DRIFT_SPEED * elapsedTime));
         setMapCoords(new_pos.getNewObjPosition(), new_pos.getNewObjBounds());
     }
+    /**
+     * Time to be removed?
+     */
     public boolean needsDeletion() {
         return is_hit;
     }
+    /**
+     * Time to be removed.
+     */
     public void touch() {
         is_hit = true;
     }
+    /**
+     * Sets the current position
+     * @param point
+     */
     @Override
-    public void setMapCoords(PointF point) {
+    public void setPosition(PointF point) {
         float width = bound.width();
         float height = bound.height();
         setMapCoords(point, new RectF(point.x - width / 2, point.y - height / 2, point.x + width / 2, point.y + height / 2));
     }
+    /**
+     * Resets the bounding box of the object used for collisions
+     */
     public void resetBounds() {
         float max_dim;
         if (image.getHeight() > image.getWidth()) // Get the max between the two.
@@ -80,32 +93,33 @@ METHODS
         else
             max_dim = image.getWidth();
         max_dim = max_dim*getScale();
-        bound = new RectF(getMapCoords().x - max_dim / 2, getMapCoords().y - max_dim / 2, getMapCoords().x + max_dim / 2, getMapCoords().y + max_dim / 2);
+        bound = new RectF(getPosition().x - max_dim / 2, getPosition().y - max_dim / 2, getPosition().x + max_dim / 2, getPosition().y + max_dim / 2);
     }
-
     /**
      * Sets the current position.
      * @param point     desired position
      * @param _bound    the bounding rectangle.
      */
     public void setMapCoords(PointF point, RectF _bound) {
-        super.setMapCoords(point);
+        super.setPosition(point);
         bound = _bound;
     }
+    /**
+     * The setter for the scale of the moving object. Also resets bounds accordingly.
+     */
     @Override
     public void setScale(float _scale) {
         super.setScale(_scale);
         resetBounds();
     }
+    /**
+     * The method enable a slight drift in rotation
+     */
     public void enableRotationDrift() {
         if (Math.random() < .5) // 50% chance of cw or ccw rotation
             rot_drift = ROTATION_DRIFT.CLOCKW;
         else
             rot_drift = ROTATION_DRIFT.COUNTERCLOCKW;
-    }
-    public void setDirection(float _direction) {
-        direction=(_direction%360); // Only allow directions in the range. Scale appropriately.
-        if(direction<0) direction+=360; // In case the value is negative.
     }
 /*
 CONSTANTS/FINALS
@@ -113,6 +127,14 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    /**
+     * The setter for direction of the object movement.
+     * @param _direction
+     */
+    public void setDirection(float _direction) {
+        direction=(_direction%360); // Only allow directions in the range. Scale appropriately.
+        if(direction<0) direction+=360; // In case the value is negative.
+    }
     /**
      * The getter for the rotation drift speed
      * @return  the rotation drift speed
@@ -127,5 +149,8 @@ GETTERS/SETTERS
      * The setter for the speed
      */
     public void setSpeed(int _speed){speed=_speed;}
+    /**
+     * The getter of the bounding box.
+     */
     public RectF getBound() {return bound;}
 }

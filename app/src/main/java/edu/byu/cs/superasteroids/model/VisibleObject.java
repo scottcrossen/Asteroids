@@ -59,6 +59,9 @@ GETTERS/SETTERS
         if (rotation < 0) rotation += 360;
         if (rotation > 360) rotation -= 360;
     }
+    /**
+     * The setter for the scale
+     */
     public void setScale(float _scale){scale=_scale;}
     /**
      * The getter for the image scale
@@ -66,9 +69,12 @@ GETTERS/SETTERS
      */
     public float getScale() {return scale;}
     /**
-     * the getter for the image
+     * The getter for the image
      * @return  the image.
      */
     public Image getImage() {return image;}
+    /**
+     * The setter for the image
+     */
     public void setImage(Image _image){image=_image;}
 }

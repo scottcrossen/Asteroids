@@ -23,11 +23,15 @@ CONSTRUCTORS
     public AsteroidFragment(Image image, PointF _map_coords) {
         super(image);
         setScale((float) .5);
-        setMapCoords(_map_coords);
+        setPosition(_map_coords);
     }
 /*
 METHODS
  */
+    /**
+     * Returns how many asteroids to create when this one dies.
+     * @return  Hint: its zero.
+     */
     @Override
     public int addUponDeletion() {
         return DELETION_CHILDREN_SIZE;

@@ -49,6 +49,10 @@ METHODS
         time_remaining -= elapsedTime;
         super.update(elapsedTime);
     }
+    /**
+     * Whether the bullet's time is up
+     * @return
+     */
     public boolean needsDeletion() {
         if (time_remaining <= 0)
             return true;

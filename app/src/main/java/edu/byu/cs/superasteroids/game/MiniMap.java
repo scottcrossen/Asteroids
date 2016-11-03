@@ -28,43 +28,51 @@ FIELDS
 /*
 CONSTRUCTORS
  */
-    public MiniMap(Level level, Ship _ship)
-    {
+    /**
+     * The Constructor for the class
+     * @param level     the level object currently on with all objects
+     * @param _ship     the ship being used.
+     */
+    public MiniMap(Level level, Ship _ship) {
         current_level = level;
         ship = _ship;
-        refreash();
+        refresh();
     }
 /*
 METHODS
  */
-    public void refreash() {
-        box = new Rect(
-                (int)(DrawingHelper.getGameViewWidth()-current_level.getWidth()*SCALE), 0,
-                DrawingHelper.getGameViewWidth(),
-                (int)(current_level.getHeight()*SCALE));
-    }
     /**
-     * the draw method needs to be overridden so that more than just the image of the minimap is displayed
+     * Refreshes the minimap. There's often a bug that needs to be refreshed.
+     */
+    public void refresh() { // Make this versatile depending on the screen its seen in.
+        box = new Rect((int)(DrawingHelper.getGameViewWidth()-current_level.getWidth()*SCALE), 0,
+                DrawingHelper.getGameViewWidth(), (int)(current_level.getHeight()*SCALE));
+    }
+    /*
+     * The draw method needs to be overridden so that more than just the image of the minimap is displayed
      */
     public void draw() {
-        //this bit overcomes the small inconvenience of the map not being initialized right when the canvas isn't initialized.
-        if (box.right == 0) {
-            refreash();
-        }
+        // This bit overcomes the small inconvenience of the map not being initialized right when the canvas isn't initialized.
+        if (box.right == 0)
+            refresh();
         DrawingHelper.drawFilledRectangle(box, Color.DKGRAY, 255);
         Iterator<Asteroid> asteroid_index = current_level.getLevelAsteroids().iterator();
-        while (asteroid_index.hasNext()) {
-            DrawingHelper.drawPoint(convertToMini(asteroid_index.next().getMapCoords()), DOT_WIDTH, Color.RED, 255);
-        }
-        DrawingHelper.drawPoint(convertToMini(ship.getMapCoords()), DOT_WIDTH, Color.GREEN, 255);
+        while (asteroid_index.hasNext())
+            DrawingHelper.drawPoint(convertToMiniMap(asteroid_index.next().getPosition()), DOT_WIDTH, Color.RED, 255);
+        DrawingHelper.drawPoint(convertToMiniMap(ship.getPosition()), DOT_WIDTH, Color.GREEN, 255);
     }
-    public PointF convertToMini(PointF map) {
+    /**
+     * Converts points from the map to the minimap
+     * @param map   the map point
+     * @return      the minimap point
+     */
+    public PointF convertToMiniMap(PointF map) {
         return new PointF((map.x*SCALE + box.left), (map.y*SCALE + box.top));
     }
 /*
 CONSTANTS/FINALS
  */
-    private static final float SCALE = (float).1;
+    private static final float SCALE = (float).1; // Displays as function of total width of screen.
     private static final float DOT_WIDTH = 10;
 /*
 GETTERS/SETTERS

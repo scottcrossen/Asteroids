@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import edu.byu.cs.superasteroids.base.Debug;
 import edu.byu.cs.superasteroids.content.ContentManager;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.game.ViewPort;
@@ -110,6 +109,10 @@ METHODS
         // Draw the text on the top to inform user of remaining asteroids.
         DrawingHelper.drawText(new Point(0, 50), "Level:" + Integer.toString(level_number) + ", Asteroids Left:" + Integer.toString(level_asteroids.size()), Color.WHITE, 50);
     }
+    /**
+     * Loads content into this class.
+     * @param content   the class to be loaded.
+     */
     public void loadContent(ContentManager content) {
         // Create a history to keep track of loaded content so duplicates aren't redone
         Map<String, Integer> used_paths = new HashMap<>();
@@ -143,6 +146,10 @@ METHODS
             music_id = -1;
         }
     }
+    /**
+     * Unloads content in this class.
+     * @param content   the content to be unloded.
+     */
     public void unloadContent(ContentManager content) {
         Map<String, Integer> used_paths = new HashMap<>(); // Create a history, so it doesn't unload things more than twice.
         Iterator<Asteroid> current_asteroid = level_asteroids.iterator();   // Unload all the asteroids
@@ -165,6 +172,11 @@ METHODS
     public boolean isFinished() {
         return (level_asteroids.size() == 0);
     }
+    /**
+     * The update function that describes how contained objects act over time. Recursively calls update
+     * on all of them
+     * @param elapsedTime   how long has passed since the last/start update.
+     */
     public void update(double elapsedTime) {
         // New asteroid fragments must be kept in a temporary list before being added to the main list
         List<Asteroid> new_asteroids = new LinkedList<>();
@@ -178,9 +190,9 @@ METHODS
                 // Add a number of asteroid fragments based on what type of asteroid it is.
                 for (int index = 0; index < current_asteroid.addUponDeletion(); index++) {
                     // Set the new asteroid's coordinates to the old's coordinates.
-                    Asteroid temp = new AsteroidFragment(current_asteroid.image, current_asteroid.getMapCoords());
+                    Asteroid temp = new AsteroidFragment(current_asteroid.image, current_asteroid.getPosition());
                     if (current_asteroid.isGrowing()) // If the parent was a growing asteroid, set the fragment to grow.
-                        temp = new GrowingAsteroid(current_asteroid.image, current_asteroid.getMapCoords());
+                        temp = new GrowingAsteroid(current_asteroid.image, current_asteroid.getPosition());
                     new_asteroids.add(temp);
                 }
                 asteroid_index.remove();
@@ -195,12 +207,16 @@ METHODS
             level_asteroids.add(temp);
         }
     }
+    /**
+     * Plays level music
+     */
     public void playMusic() {
         ContentManager.getInstance().playLoop(music_id);
     }
-    public void drawTransition() {
-        DrawingHelper.drawCenteredText("Level " + Integer.toString(level_number) + " - " + hint, (int)(100.0*(DrawingHelper.getGameViewWidth()/1500.0)), Color.WHITE);
-    }
+    /**
+     * The setter of the viewport. Calls all objects and sets correct values.
+     * @param _viewport the current viewport.
+     */
     public void setViewPort(ViewPort _viewport) {
         viewport = _viewport;
         Iterator<Asteroid> asteroid_index = level_asteroids.iterator(); // Set viewport for all asteroid objects
@@ -245,9 +261,25 @@ GETTERS/SETTERS
      * @return  the level music
      */
     public String getMusic() {return music;}
+    /**
+     * The getter of the level number
+     */
     public int getLevelNumber() {return level_number;}
+    /**
+     * The setter of the level hint
+     * @param hint  the level hint.
+     */
     public void setHint(String hint) {this.hint = hint;}
+    /**
+     * The getter of the level bounds
+     */
     public RectF getBound() {return new RectF(0, 0, width, height);}
+    /**
+     * The getter of the level center
+     */
     public PointF getCenter() {return new PointF(width/2, height/2);}
+    /**
+     * The getter of the level asteroids
+     */
     public List<Asteroid> getLevelAsteroids() {return level_asteroids;}
 }

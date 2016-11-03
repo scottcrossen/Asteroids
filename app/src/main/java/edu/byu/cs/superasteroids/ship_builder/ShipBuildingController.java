@@ -45,8 +45,12 @@ public class ShipBuildingController implements IShipBuildingController {
     private Ship ship;
     private boolean content_loaded = false;
     private Map<IShipBuildingView.ViewDirection,IShipBuildingView.PartSelectionView> arrows=new HashMap<>();
-    /*
-    CONSTRUCTORS
+/*
+CONSTRUCTORS
+ */
+    /**
+     * The default constructor.
+     * @param calling_instance  the context for a new database to be used.
      */
     ShipBuildingController(ShipBuildingActivity calling_instance){
         Database db=new Database(calling_instance);
@@ -119,13 +123,19 @@ METHODS
                 break;
         }
     }
+    /**
+     * For use with easy debugging of the current screen.
+     */
     private void debug_state(){
         debug.output("State: "+part_selection_to_string(state));
         debug.output("Left: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
-        debug.output("Up: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
-        debug.output("Right: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
-        debug.output("Down: "+part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
+        debug.output("Up: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
+        debug.output("Right: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
+        debug.output("Down: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
     }
+    /**
+     * Sets the current state of the arrows
+     */
     private void set_arrows(){
         view.setArrow(state, IShipBuildingView.ViewDirection.LEFT, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
         view.setArrow(state, IShipBuildingView.ViewDirection.UP, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
@@ -133,6 +143,9 @@ METHODS
         view.setArrow(state, IShipBuildingView.ViewDirection.DOWN, true, part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.DOWN)));
         debug_state();
     }
+    /**
+     * Converts enum to string
+     */
     private String part_selection_to_string(IShipBuildingView.PartSelectionView part_selection){
         String output = new String();
         switch(part_selection){
@@ -157,6 +170,9 @@ METHODS
         }
         return output;
     }
+    /**
+     * Converts enum to string
+     */
     private String view_direction_to_string(IShipBuildingView.ViewDirection view_direction){
         String output = new String();
         switch(view_direction){
@@ -193,6 +209,9 @@ METHODS
             content_loaded = true;
         }
     }
+    /**
+     * Loads content from list of ship parts
+     */
     private List<Integer> load (List<? extends ShipPart> parts, ContentManager content) {
         List<Integer> output=new LinkedList<>();
         Iterator<? extends ShipPart> index = parts.iterator();
@@ -204,6 +223,10 @@ METHODS
         }
         return output;
     }
+    /**
+     * Unloads content used.
+     * @param content An instance of the content manager. This should be used to unload image and
+     */
     @Override
     public void unloadContent(ContentManager content) {
         if(content_loaded){
@@ -216,12 +239,21 @@ METHODS
             content_loaded = false;
         }
     }
+    /**
+     * Unloads individual content
+     * @param part_ids
+     * @param content
+     */
     private void unload(List<Integer> part_ids, ContentManager content){
         Iterator<Integer> index = part_ids.iterator();
         while(index.hasNext()) {
             content.unloadImage(index.next());
         }
     }
+    /**
+     * Switches state when arrow "pressed"
+     * @param direction The direction of the swipe/fling.
+     */
     @Override
     public void onSlideView(IShipBuildingView.ViewDirection direction) {
         debug.output("Arrow selected: "+view_direction_to_string(direction));

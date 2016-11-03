@@ -38,6 +38,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * the equals method used to compare two images.
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) { // This was modified from the generated default method
         if (other == null)
@@ -57,24 +62,40 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    /**
+     * The getter for the image content
+     */
     public int getContentID(){return content_id;}
+    /**
+     * The setter for the content ID.
+     */
     public void setContentID(int id) {content_id = id;}
     /**
      * The getter for the image path
      * @return  the image path
      */
     public String getPath() {return path;}
+    /**
+     * The getter for the image path
+     * @param path
+     */
     public void setPath(String path) {this.path = path;}
     /**
      * The getter of the image width
      * @return  the image width
      */
     public int getWidth() {return image_width;}
+    /**
+     * the setter of the image width
+     */
     public void setWidth(int image_width) {this.image_width = image_width;}
     /**
      * The getter of the image height
      * @return  the image height
      */
     public int getHeight() {return image_height;}
+    /**
+     * the setter of the image height
+     */
     public void setHeight(int image_height) {this.image_height = image_height;}
 }

@@ -41,7 +41,7 @@ METHODS
      */
     @Override
     public void draw() {
-        PointF view_coords = getViewCoords();
+        PointF view_coords = getViewPortCoords();
         DrawingHelper.drawImage(image.getContentID(), view_coords.x, view_coords.y, getRotation(), getScale(), getScale(), 255);
     }
 /*
@@ -59,8 +59,12 @@ GETTERS/SETTERS
      * The setter for the position
      */
     public void setPosition(PointF _position){position=_position;}
+    /**
+     * The setter for the viewport
+     */
     public void setViewPort(ViewPort viewPort) {view_port = viewPort;}
-    public PointF getViewCoords() {return view_port.convertToViewPort(position);}
-    public PointF getMapCoords() {return position;}
-    public void setMapCoords(PointF point) {position = point;}
+    /**
+     * The getter for the viewport coordinates
+     */
+    public PointF getViewPortCoords() {return view_port.convertToViewPort(position);}
 }

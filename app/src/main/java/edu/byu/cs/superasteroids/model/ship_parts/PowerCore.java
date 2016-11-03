@@ -35,6 +35,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * The getter for the mount point where this part attaches.
+     * @param main_body the main body it attaches to
+     * @return the created mount point
+     */
     @Override
     public MountPoint getBodyAttachPoint(MainBody main_body) {return null;}
 /*

@@ -42,6 +42,9 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * Compares to objects to see if they are equal.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null)

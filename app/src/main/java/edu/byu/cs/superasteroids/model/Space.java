@@ -28,6 +28,11 @@ CONSTRUCTORS
 /*
 METHODS
  */
+    /**
+     * This method takes a width and height of the space and scales it.
+     * @param width     the width of the object
+     * @param height    the height of the object.
+     */
     public void setScale(float width, float height) {
         scale_x = width / 2048;
         scale_y = height / 2048;
@@ -38,7 +43,7 @@ METHODS
      */
     @Override
     public void draw() {
-        PointF view_coords = view_port.convertToViewPort(getMapCoords());
+        PointF view_coords = view_port.convertToViewPort(getPosition());
         DrawingHelper.drawImage(getImage().getContentID(), view_coords.x, view_coords.y, (float) 0, scale_x, scale_y, 255);
     }
 /*

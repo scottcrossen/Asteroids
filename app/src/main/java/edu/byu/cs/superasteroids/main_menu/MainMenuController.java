@@ -12,7 +12,7 @@ import edu.byu.cs.superasteroids.model.ship_parts.PowerCore;
 import edu.byu.cs.superasteroids.model.ship_parts.Ship;
 
 /**
- * Created by slxn42 on 10/29/16.
+ * Created by Scott Leland Crossen
  */
 public class MainMenuController implements IMainMenuController {
 /*
@@ -23,6 +23,10 @@ FIELDS
 /*
 CONSTRUCTORS
  */
+    /**
+     * The constructor for the main menu controller.
+     * @param main_activity
+     */
     public MainMenuController(MainActivity main_activity) {
         db = new Database(main_activity);//Initialize the database
         view = main_activity;
@@ -36,11 +40,14 @@ CONSTANTS/FINALS
 /*
 GETTERS/SETTERS
  */
+    /**
+     * What happens when the quick-play button is pressed.
+     */
     @Override
     public void onQuickPlayPressed() {
         Ship.createNew();
         Ship ship = Ship.getInstance();
-        //load the parts from the database
+        // Load the parts from the database
         List<MainBody> main_bodies = db.dao.getMainBodies();
         List<Engine> engines = db.dao.getEngines();
         List<PowerCore> power_cores = db.dao.getPowerCores();
@@ -54,8 +61,15 @@ GETTERS/SETTERS
         ship.setEngine(engines.get((int)(Math.random() * (engines.size()))));
         view.startGame();
     }
+    /**
+     * A method forced by inheritance. does nothing.
+     * @return  null. nothing. zelpch.
+     */
     @Override
     public IView getView() {return null;}
+    /**
+     * A method forced by inheritance. does nothing.
+     */
     @Override
     public void setView(IView view) {}
 }

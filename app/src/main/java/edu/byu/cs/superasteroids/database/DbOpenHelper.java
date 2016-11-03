@@ -24,10 +24,7 @@ CONSTRUCTORS
      * the constructor for the open helper.
      * @param context   only the context needs to be passed in.
      */
-    public DbOpenHelper(Context context)
-    {
-        super(context, DB_NAME, null, DB_VERSION);
-    }
+    public DbOpenHelper(Context context) {super(context, DB_NAME, null, DB_VERSION);}
 /*
 METHODS
  */
@@ -223,7 +220,5 @@ GETTERS/SETTERS
      * The getter for the database name
      * @return  the database name
      */
-    public static String getDbName() {
-        return DB_NAME;
-    }
+    public static String getDbName() {return DB_NAME;}
 }

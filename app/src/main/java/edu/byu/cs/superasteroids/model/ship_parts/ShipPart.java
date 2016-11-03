@@ -52,6 +52,11 @@ METHODS
         DrawingHelper.drawImage(image.getContentID(), rotated.x + ship_location.x, rotated.y + ship_location.y, rotation, scale, scale, 255);
     }
     //This method is mainly used for polymorphism and connecting parts to ship
+    /**
+     * The getter for the mount point where this part attaches.
+     * @param main_body the main body it attaches to
+     * @return the created mount point
+     */
     abstract public MountPoint getBodyAttachPoint(MainBody main_body);
 /*
 CONSTANTS/FINALS
@@ -69,5 +74,8 @@ GETTERS/SETTERS
      * @return  the mount-point
      */
     public MountPoint getMountPoint() {return mount_point;}
+    /**
+     * The setter for the mount point used.
+     */
     public void setMountPoint(MountPoint mount_point) {this.mount_point = mount_point;}
 }
