@@ -52,15 +52,25 @@ CONSTRUCTORS
      * The default constructor.
      * @param calling_instance  the context for a new database to be used.
      */
-    ShipBuildingController(ShipBuildingActivity calling_instance){
-        Database db=new Database(calling_instance);
-        view=calling_instance;
+    ShipBuildingController(ShipBuildingActivity calling_instance) {
+        Database db = new Database(calling_instance);
+        view = calling_instance;
         main_bodies = db.dao.getMainBodies();
         engines = db.dao.getEngines();
         power_cores = db.dao.getPowerCores();
         cannons = db.dao.getCannons();
         extra_parts = db.dao.getExtraParts();
-        ship=Ship.createNew();
+        ship = Ship.createNew();
+        arrows.put(IShipBuildingView.ViewDirection.LEFT, null);
+        arrows.put(IShipBuildingView.ViewDirection.UP, null);
+        arrows.put(IShipBuildingView.ViewDirection.RIGHT, null);
+        arrows.put(IShipBuildingView.ViewDirection.DOWN, null);
+        /**
+         * The constructor used for test cases
+         */
+    }
+    ShipBuildingController(){
+        ship=Ship.getInstance();
         arrows.put(IShipBuildingView.ViewDirection.LEFT,null);
         arrows.put(IShipBuildingView.ViewDirection.UP,null);
         arrows.put(IShipBuildingView.ViewDirection.RIGHT,null);
@@ -127,7 +137,7 @@ METHODS
      * For use with easy debugging of the current screen.
      */
     private void debug_state(){
-        debug.output("State: "+part_selection_to_string(state));
+        debug.output("State: " + part_selection_to_string(state));
         debug.output("Left: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.LEFT)));
         debug.output("Up: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.UP)));
         debug.output("Right: " + part_selection_to_string(arrows.get(IShipBuildingView.ViewDirection.RIGHT)));
@@ -319,7 +329,7 @@ METHODS
     @Override
     public void draw() {
         final PointF gameViewCenter = new PointF(DrawingHelper.getGameViewWidth() /2, DrawingHelper.getGameViewHeight() / 2);
-        ship.draw(gameViewCenter, (float)SHIP_SCALE);
+        ship.draw(gameViewCenter, (float) SHIP_SCALE);
     }
     /**
      * This starts the game when the button is pressed.
@@ -349,10 +359,21 @@ METHODS
      */
     @Override
     public void setView(IView _view) {}
+
 /*
 CONSTANTS/FINALS
  */
 /*
 GETTERS/SETTERS
  */
+    /**
+     * The getter for the arrows
+     */
+    public Map<IShipBuildingView.ViewDirection, IShipBuildingView.PartSelectionView> getArrows() {
+        return arrows;
+    }
+    /**
+     * The getter for the current state
+     */
+    public IShipBuildingView.PartSelectionView getState(){return state;}
 }

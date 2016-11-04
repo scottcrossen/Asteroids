@@ -7,7 +7,10 @@ import android.test.AndroidTestCase;
 import static edu.byu.cs.superasteroids.core.GraphicsUtils.*;
 
 public class GraphicsUtilsTests extends AndroidTestCase {
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRadiansToDegrees() {
         assertEquals(0.0, radiansToDegrees(ZERO));
         assertEquals(90.0, radiansToDegrees(HALF_PI));
@@ -15,7 +18,10 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertEquals(270.0, radiansToDegrees(THREE_HALF_PI));
         assertEquals(360.0, radiansToDegrees(TWO_PI));
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testAdd() {
         assertEquals(new PointF(30.0f, 30.0f),
                         add(new PointF(10.0f, 10.0f), new PointF(20.0f, 20.0f)));
@@ -24,7 +30,10 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertEquals(new PointF(10.0f, 10.0f),
                 add(new PointF(-10.0f, -10.0f), new PointF(20.0f, 20.0f)));
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testSubtract() {
         assertEquals(new PointF(-10.0f, -10.0f),
                 subtract(new PointF(10.0f, 10.0f), new PointF(20.0f, 20.0f)));
@@ -33,44 +42,55 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertEquals(new PointF(-30.0f, -30.0f),
                 subtract(new PointF(-10.0f, -10.0f), new PointF(20.0f, 20.0f)));
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testDistance() {
         assertEquals(10.0, distance(new PointF(-5.0f, 0.0f), new PointF(5.0f, 0.0f)));
         assertEquals(10.0, distance(new PointF(0.0f, -5.0f), new PointF(0.0f, 5.0f)));
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testScale() {
         assertEquals(new PointF(-20.0f, 50.0f), scale(new PointF(-2.0f, 5.0f), 10.0f));
     }
-
     public void testTranslate() {
         assertEquals(new PointF(0.0f, 0.0f), translate(new PointF(5.0f, -5.0f), -5.0f, 5.0f));
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRotate_1() {
         PointF expected;
         PointF actual;
-
         expected = new PointF(0.0f, 1.0f);
         actual = rotate(new PointF(1.0f, 0.0f), HALF_PI);
         assertFloatsEqual(expected.x, actual.x);
         assertFloatsEqual(expected.y, actual.y);
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRotate_2() {
         PointF expected;
         PointF actual;
-
         expected = new PointF(0.0f, 1.0f);
         actual = rotate(new PointF(1.0f, 0.0f), 0.0, 1.0);
         assertFloatsEqual(expected.x, actual.x);
         assertFloatsEqual(expected.y, actual.y);
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testMoveObject_1() {
         MoveObjectResult expected;
         MoveObjectResult actual;
-
         expected = new MoveObjectResult();
         expected.getNewObjPosition().x = 5.0f;
         expected.getNewObjPosition().y = -5.0f;
@@ -83,11 +103,13 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertEquals(expected.getNewObjPosition(), actual.getNewObjPosition());
         assertEquals(expected.getNewObjBounds(), actual.getNewObjBounds());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testMoveObject_2() {
         MoveObjectResult expected;
         MoveObjectResult actual;
-
         expected = new MoveObjectResult();
         expected.getNewObjPosition().x = 5.0f;
         expected.getNewObjPosition().y = -5.0f;
@@ -100,14 +122,15 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertEquals(expected.getNewObjPosition(), actual.getNewObjPosition());
         assertEquals(expected.getNewObjBounds(), actual.getNewObjBounds());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRicochetObject_1_Edges() {
         final float WORLD_WIDTH = 1000.0f;
         final float WORLD_HEIGHT = 1000.0f;
-
         RicochetObjectResult expected;
         RicochetObjectResult actual;
-
         // Top edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 500.0f;
@@ -126,7 +149,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 500.0f;
@@ -146,7 +168,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Left edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -165,7 +186,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Right edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -186,14 +206,15 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRicochetObject_1_Corners() {
         final float WORLD_WIDTH = 1000.0f;
         final float WORLD_HEIGHT = 1000.0f;
-
         RicochetObjectResult expected;
         RicochetObjectResult actual;
-
         // Top-Left corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -212,7 +233,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Top-Right corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -232,7 +252,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom-Left corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -252,7 +271,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom-Right corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -273,14 +291,15 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRicochetObject_2_Edges() {
         final float WORLD_WIDTH = 1000.0f;
         final float WORLD_HEIGHT = 1000.0f;
-
         RicochetObjectResult expected;
         RicochetObjectResult actual;
-
         // Top edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 500.0f;
@@ -299,7 +318,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 500.0f;
@@ -319,7 +337,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Left edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -338,7 +355,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Right edge
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -359,14 +375,15 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     public void testRicochetObject_2_Corners() {
         final float WORLD_WIDTH = 1000.0f;
         final float WORLD_HEIGHT = 1000.0f;
-
         RicochetObjectResult expected;
         RicochetObjectResult actual;
-
         // Top-Left corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -386,7 +403,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Top-Right corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -407,7 +423,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom-Left corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = 1.0f;
@@ -428,7 +443,6 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleRadians(), actual.getNewAngleRadians());
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
-
         // Bottom-Right corner
         expected = new RicochetObjectResult();
         expected.getNewObjPosition().x = WORLD_WIDTH - 1.0f;
@@ -450,12 +464,18 @@ public class GraphicsUtilsTests extends AndroidTestCase {
         assertDoublesEqual(expected.getNewAngleCosine(), actual.getNewAngleCosine());
         assertDoublesEqual(expected.getNewAngleSine(), actual.getNewAngleSine());
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     private void assertFloatsEqual(float expected, float actual) {
         final float DELTA = 0.000001f;
         assertEquals(expected, actual, DELTA);
     }
-
+    /**
+     * Tests the given method
+     * @throws Exception if the assertEquals statements don't hold
+     */
     private void assertDoublesEqual(double expected, double actual) {
         final double DELTA = 0.000001;
         assertEquals(expected, actual, DELTA);

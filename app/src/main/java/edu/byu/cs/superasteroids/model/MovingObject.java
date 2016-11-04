@@ -136,6 +136,10 @@ GETTERS/SETTERS
         if(direction<0) direction+=360; // In case the value is negative.
     }
     /**
+     * The getter for direction
+     */
+    public float getDirection(){return direction;}
+    /**
      * The getter for the rotation drift speed
      * @return  the rotation drift speed
      */

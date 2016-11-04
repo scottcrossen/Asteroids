@@ -32,6 +32,10 @@ CONSTRUCTORS
         context = _context;
         debug = new Debug(1);
     }
+    /**
+     * The constructor for the JUnit test cases
+     */
+    public GameDataImporter(){}// For Test Case
 /*
 METHODS
  */
